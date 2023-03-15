@@ -1,0 +1,39 @@
+
+<div class="card">
+  <div class="card-header card-header-success">
+      <h4 class="card-title">{{title}}</h4>
+      <p class="card-category">{{description}}</p>
+  </div>
+  <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="row">
+              <div class="col-md-3">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Bill Total</mat-label>
+                  <input matInput value={{this.data.billTotal}} placeholder="Patient Number" type="text" disabled>
+                </mat-form-field>
+              </div>                            
+              <div class="col-md-4">                                    
+                  <mat-form-field appearance="fill" class="example-full-width">
+                      <mat-label>Payment Type</mat-label>
+                      <mat-select formControlName="cashType">
+                        <mat-option *ngFor ="let cashType of this.cashType" [value]="cashType.cashTypeId" >{{cashType.cashType}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+              </div>
+          </div>
+          <div class="row">
+            <div class="col-md-2">
+                <mat-form-field class="example-full-width">
+                  <mat-label>Reference</mat-label>
+                  <input formControlName="reference" matInput placeholder="Payment Refrence" type="text">
+                </mat-form-field>
+          </div>
+          </div>
+          <button mat-raised-button type="submit" class="btn btn-danger pull-right">{{button}}</button>
+          <div class="clearfix"></div>
+      </form>
+  </div>
+</div>
+
+  

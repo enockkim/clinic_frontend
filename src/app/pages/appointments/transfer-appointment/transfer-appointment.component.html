@@ -1,0 +1,91 @@
+<!-- <div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">-->
+                <div class="card">
+                    <div class="card-header card-header-success">
+                        <h4 class="card-title">{{title}}</h4>
+                        <p class="card-category">{{description}}</p>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                          <div class="row">
+                              <div class="col-md-2">
+                                    <mat-form-field appearance="fill" class="example-full-width">
+                                        <mat-label>Patient</mat-label>
+                                        <input matInput placeholder="First Name"  type="text" disabled>
+                                      </mat-form-field>
+                              </div>
+                                <div class="col-md-3">
+                                  <mat-form-field class="example-full-width">
+                                    <mat-label>Number</mat-label>
+                                    <input matInput value={{data.appointmentData.patientId}} placeholder="Patient Number" type="text" disabled>
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                  <mat-form-field class="example-full-width">
+                                    <mat-label>Name</mat-label>
+                                    <input matInput value={{data.appointmentData.patientName}} placeholder="Patient Name" type="text" disabled>
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-2">
+                                <mat-form-field appearance="fill" class="example-full-width">
+                                    <mat-label>Appointment</mat-label>
+                                    <input matInput type="text" disabled>
+                                  </mat-form-field>
+                                </div>
+                                      <div class="col-md-2">
+                                        <mat-form-field class="example-full-width">
+                                          <mat-label>Appointment ID</mat-label>
+                                          <input matInput value={{data.appointmentData.appointmentId}} type="number" disabled>
+                                        </mat-form-field>
+                                      </div>
+                                <div class="col-md-2">
+                                  <mat-form-field class="example-full-width">
+                                    <mat-label>Appointment Type</mat-label>
+                                    <input matInput value={{data.appointmentData.appointmentTypeName}} placeholder="Patient Name" type="text" disabled>
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                  <mat-form-field class="example-full-width">
+                                    <mat-label>Appointment Date</mat-label>
+                                    <input matInput value={{data.appointmentData.dateOfAppointment}} placeholder="Patient Name" type="text" disabled>
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                  <mat-form-field class="example-full-width">
+                                    <mat-label>Remarks</mat-label>
+                                    <input matInput value={{data.appointmentData.remarks}} placeholder="Patient Name" type="text" disabled>
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">                              
+                                <div class="col-md-4">                                    
+                                    <mat-form-field appearance="fill" class="example-full-width">
+                                        <mat-label>Payment Method</mat-label>
+                                        <mat-select formControlName="paymentMethod">
+                                          <mat-option *ngFor ="let paymentMethod of this.data.paymentMethods" [value]="paymentMethod.methodId" >{{paymentMethod.method}}</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                </div>
+                                <div class="col-md-4">                                    
+                                    <mat-form-field appearance="fill" class="example-full-width">
+                                        <mat-label>Facility</mat-label>
+                                        <mat-select formControlName="facility">
+                                          <mat-option *ngFor ="let facility of this.data.facilities" [value]="facility.facilityId" >{{facility.facilityName}}</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">{{button}}</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+           <!-- </div>
+        </div>
+    </div>
+  </div> -->
+  

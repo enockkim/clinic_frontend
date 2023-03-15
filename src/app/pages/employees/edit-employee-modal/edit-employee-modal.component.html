@@ -1,0 +1,150 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header card-header-success">
+                        <h4 class="card-title">Add New Employee</h4>
+                        <p class="card-category">Complete the following form to add a new employee</p>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                          <div class="row">
+                              <div class="col-md-2">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Employee ID" >
+                                  </mat-form-field>
+                              </div>
+                          </div>
+                          <h3>Personal Information</h3>
+                            <div class="row">
+                                <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Surname" type="text">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Other Names" type="text">
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="National ID" type="text">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                  <mat-form-field appearance="fill" class="example-full-width">
+                                      <mat-label>Gender</mat-label>
+                                      <mat-select>
+                                        <mat-option value="one">Male</mat-option>
+                                        <mat-option value="two">Female</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Date of Birth</mat-label>
+                                    <input matInput [matDatepicker]="picker">
+                                    <mat-hint>MM/DD/YYYY</mat-hint>
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                            <h3>Contact</h3>
+                            <div class="row">
+                                <div class="col-md-3">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Email" type="text">
+                                  </mat-form-field>
+                                </div>                             
+                                <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Phone Number" type="text">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                      <input matInput placeholder="Email address" type="email">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <h3>Place of Residence</h3>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                      <input matInput placeholder="Address" type="email">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <h3>Next of Kin</h3>
+                            <div class="row">
+                                <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Name" type="text">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Contact" type="text">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="fill" class="example-full-width">
+                                        <mat-label>Relationship</mat-label>
+                                        <mat-select>
+                                          <mat-option value="one">Father</mat-option>
+                                          <mat-option value="two">Mother</mat-option>
+                                          <mat-option value="two">Brother</mat-option>
+                                          <mat-option value="two">Sister</mat-option>
+                                          <mat-option value="two">Uncle</mat-option>
+                                          <mat-option value="two">Aunt</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                </div>
+                            </div>
+                            <h3>Employment Details</h3>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="fill" class="example-full-width">
+                                        <mat-label>Employment Type</mat-label>
+                                        <mat-select>
+                                          <mat-option value="one">Contract</mat-option>
+                                          <mat-option value="two">Permanent</mat-option>
+                                          <mat-option value="two">Consultancy</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="fill" class="example-full-width">
+                                        <mat-label>Designation</mat-label>
+                                        <mat-select>
+                                          <mat-option value="one">Doctor</mat-option>
+                                          <mat-option value="two">Nurse</mat-option>
+                                          <mat-option value="two">Accountant</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Starting Date</mat-label>
+                                    <input matInput [matDatepicker]="picker">
+                                    <mat-hint>MM/DD/YYYY</mat-hint>
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

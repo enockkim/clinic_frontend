@@ -1,0 +1,257 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 col-md-8">
+                <mat-tab-group>
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <mat-icon class="example-tab-icon">person</mat-icon>
+                            &nbsp;{{tableTitle}}
+                        </ng-template>
+                        <table mat-table [dataSource]="DataSource" multiTemplateDataRows class="mat-elevation-z8">
+                            <ng-container matColumnDef="{{column}}" *ngFor="let column of DataColumnsToDisplay">
+                                <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                                <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+                            </ng-container>
+                            <ng-container matColumnDef="expand">
+                                <th mat-header-cell *matHeaderCellDef aria-label="row actions">&nbsp;</th>
+                                <td mat-cell *matCellDef="let element">
+                                    <button mat-icon-button aria-label="expand row"
+                                    (click)="(expandedElement = expandedElement === element ? null : element); $event.stopPropagation()" (click)="toggleRow(element)">
+                                    <mat-icon *ngIf="expandedElement !== element">keyboard_arrow_down</mat-icon>
+                                    <mat-icon *ngIf="expandedElement === element">keyboard_arrow_up</mat-icon>
+                                  </button>
+                                </td>
+                            </ng-container> 
+                            <ng-container matColumnDef="expandedDetail">
+                                <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplayWithExpand.length">
+                                    <div class="example-element-detail" [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+
+                                        <table mat-table [dataSource]="DetailDataSource" class="inner-table mat-elevation-z8" *ngIf="expandedElement">
+
+                                            <!-- Define columns to display -->
+                                            <ng-container *ngFor="let column of DetailsColumnsToDisplay" [matColumnDef]="column">
+                                              <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
+                                              <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+                                            </ng-container>
+                                          
+                                            <!-- Add button column -->
+                                            <ng-container matColumnDef="actions">
+                                              <th mat-header-cell *matHeaderCellDef></th>
+                                              <td mat-cell *matCellDef="let element">
+                                                <button mat-button (click)="loadForm(element)">
+                                                    <mat-icon >keyboard_arrow_right </mat-icon>
+                                                </button>
+                                              </td>
+                                            </ng-container>
+                                          
+                                            <!-- Add columns to display -->
+                                            <tr mat-header-row *matHeaderRowDef="DetailsColumnsToDisplay"></tr>
+                                            <tr mat-row *matRowDef="let row; columns: DetailsColumnsToDisplay;"></tr>
+                                            <tr mat-row *matRowDef="let row; columns: ['actions'];"></tr>
+                                            
+                                          </table>
+                                          
+
+                                        <!-- <table mat-table #outerSort="matSort" [dataSource]="DetailDataSource" multiTemplateDataRows class="mat-elevation-z8" matSort #expandedTable><p>hello1</p>
+                                            <ng-container matColumnDef="{{column}}" *ngFor="let column of DetailsColumnsToDisplay"><p>hello2</p>
+                                                <th mat-header-cell *matHeaderCellDef mat-sort-header> {{column}} </th><p>hello3</p>
+                                                <td mat-cell *matCellDef="let element"> {{element[column]}} </td>                    
+                                            </ng-container> <p>hello4</p>
+                                            <tr mat-header-row *matHeaderRowDef="DetailsColumnsToDisplay"><p>hello5</p>  </tr><p>hello6</p>
+                                            <tr mat-row *matRowDef="let row; columns: DetailsColumnsToDisplay;" ><p>hello7</p></tr>
+                                            <p>hello8</p>    
+                                        </table> -->
+                                    </div>
+                                </td>
+                            </ng-container>
+                            <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+                            <tr mat-row *matRowDef="let element; columns: columnsToDisplayWithExpand;" class="example-element-row" [class.example-expanded-row]="expandedElement === element"
+                                (click)="expandedElement = expandedElement === element ? null : element">
+                            </tr>
+                            <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row">
+                            </tr>
+                        </table>
+                    </mat-tab>
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <mat-icon class="example-tab-icon">list</mat-icon>
+                            &nbsp;Records
+                        </ng-template>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+            <div class="col-lg-4 col-md-4">
+                <div class="card">
+                    <div class="card-header card-header-success">
+                        <h4 class="card-title">{{title}}</h4>
+                        <p class="card-category">{{patientName}}</p>
+                    </div>
+                    <div class="card-body">
+                        <container-element [ngSwitch]="this.facilityForm">  
+                            <div *ngSwitchCase="'lab'">
+                                <form [formGroup]="form" (ngSubmit)="transferLab()">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Laboratory Type</mat-label>
+                                                <input matInput value={{this.FormData.labTypeId}} type="text" placeholder="Payment Refrence" disabled>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Date</mat-label>
+                                                <input matInput value={{this.FormData.date}} type="text" disabled>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Laboratory Result</mat-label>
+                                                <input matInput value={{this.FormData.labResults}} type="text" formControlName="labResult">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Lab Technician Remarks</mat-label>
+                                                <input matInput value={{this.FormData.labTechRemarks}} type="text" formControlName="labTechRemarks">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">                                 
+                                            <mat-form-field appearance="fill" class="example-full-width">
+                                                <mat-label>Transfer to: </mat-label>
+                                                <mat-select formControlName="facility">
+                                                <mat-option *ngFor ="let facility of this.facilitiesResult" [value]="facility.facilityId" >{{facility.facilityName}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <button mat-raised-button type="submit"
+                                        class="btn btn-danger pull-right">{{button}}</button>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
+                            <div *ngSwitchCase="'diagnosticImaging'">
+                                <form [formGroup]="form" (ngSubmit)="transferDiagnosticImaging()">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Imaging Type</mat-label>
+                                                <input matInput value={{this.FormData.imagingSubType}} type="text" placeholder="Payment Refrence" disabled>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Date</mat-label>
+                                                <input matInput value={{this.FormData.datetimeOfRequest}} type="text" disabled>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Doctor Remarks</mat-label>
+                                                <input matInput value={{this.FormData.doctorRemarks}} type="text" disabled>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Imaging Result</mat-label>
+                                                <input matInput value={{this.FormData.result}} type="text" formControlName="imagingResult">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Lab Technician Remarks</mat-label>
+                                                <input matInput value={{this.FormData.technicianRemarks}} type="text" formControlName="labTechRemarks">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">                                 
+                                            <mat-form-field appearance="fill" class="example-full-width">
+                                                <mat-label>Transfer to: </mat-label>
+                                                <mat-select formControlName="facility">
+                                                <mat-option *ngFor ="let facility of this.facilitiesResult" [value]="facility.facilityId" >{{facility.facilityName}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <button mat-raised-button type="submit"
+                                        class="btn btn-danger pull-right">{{button}}</button>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
+                            <div *ngSwitchCase="'operations'">
+                                <form [formGroup]="form" (ngSubmit)="transferOperation()">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Operation Type</mat-label>
+                                                <input matInput value={{this.FormData.imagingSubType}} type="text" placeholder="Payment Refrence" disabled>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Date</mat-label>
+                                                <input matInput value={{this.FormData.datetimeOfRequest}} type="text" disabled>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Doctor Remarks</mat-label>
+                                                <input matInput value={{this.FormData.doctorRemarks}} type="text" disabled>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Operator Remarks</mat-label>
+                                                <input matInput value={{this.FormData.technicianRemarks}} type="text" formControlName="operatorRemarks">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">                                 
+                                            <mat-form-field appearance="fill" class="example-full-width">
+                                                <mat-label>Transfer to: </mat-label>
+                                                <mat-select formControlName="facility">
+                                                <mat-option *ngFor ="let facility of this.facilitiesResult" [value]="facility.facilityId" >{{facility.facilityName}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <button mat-raised-button type="submit"
+                                        class="btn btn-danger pull-right">{{button}}</button>
+                                    <div class="clearfix"></div>
+                                </form>
+                            </div>
+                            <div *ngSwitchCase="'vitals'">
+
+                            </div>
+                        </container-element>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

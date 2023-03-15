@@ -1,0 +1,152 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header card-header-success">
+                        <h4 class="card-title">Add New Patient</h4>
+                        <p class="card-category">Complete the following form to add a new patient</p>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                          <!-- <div class="row">
+                              <div class="col-md-2">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Patient ID" disabled>
+                                  </mat-form-field>
+                              </div>
+                          </div> -->
+                          <h3>Personal Information</h3>
+                            <div class="row">
+                                <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Surname" formControlName="surname" type="text" (input)="logData()">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Other Name" formControlName="otherName" type="text">
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="National ID" formControlName="nationalIdNumber" type="text">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                  <mat-form-field appearance="fill"class="example-full-width">
+                                      <mat-label>Gender</mat-label>
+                                      <mat-select formControlName="gender">
+                                        <mat-option *ngFor="let gender of this.genders" [value]="gender.id">{{gender.genderName}}</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                  <mat-form-field appearance="fill" >
+                                    <mat-label>Date of Birth</mat-label>
+                                    <input matInput [matDatepicker]="picker" formControlName="dob" >
+                                    <mat-hint>MM/DD/YYYY</mat-hint>
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                    <mat-datepicker #picker></mat-datepicker>
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                  <!-- <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Age" type="text" disabled> 
+                                  </mat-form-field> -->
+                                </div>
+                            </div>
+                            <h3>Contact</h3>
+                            <div class="row">
+                                <div class="col-md-3">
+                                  <!-- <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Email" type="text">
+                                  </mat-form-field> -->
+                                </div>                             
+                                <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Phone Number" formControlName="contact" type="text">
+                                  </mat-form-field>
+                                </div>
+                              <!--   <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                      <input matInput placeholder="Email address" type="email">
+                                    </mat-form-field>
+                                </div>-->
+                            </div>
+                            <h3>Place of Residence</h3>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="fill" class="example-full-width">
+                                        <mat-label>County</mat-label>
+                                        <mat-select formControlName="county">
+                                          <mat-option value=1>Nairobi</mat-option>
+                                          <mat-option value=2>Mombasa</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="fill" class="example-full-width">
+                                        <mat-label>Sub-County</mat-label>
+                                        <mat-select formControlName="subcounty">
+                                          <mat-option value=1>Embakasi East</mat-option>
+                                          <mat-option value=2>Mombasa</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="fill" class="example-full-width">
+                                        <mat-label>Constituency</mat-label>
+                                        <mat-select formControlName="ward">
+                                          <mat-option value=1>Embakasi</mat-option>
+                                          <mat-option value=2>Mombasa</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                </div>
+                            </div>
+                            <!--<h3>Occupation</h3>
+                            <div class="row">
+                                <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Proffession" type="text">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Location" type="text">
+                                  </mat-form-field>
+                                </div>
+                            </div>-->
+                            <h3>Next of Kin</h3>
+                            <div class="row">
+                                <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Name" formControlName="nokName" type="text">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput placeholder="Contact" formControlName="nokContact" type="text">
+                                  </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field appearance="fill" class="example-full-width">
+                                        <mat-label>Relationship</mat-label>
+                                        <mat-select formControlName="nokRelationship">
+                                          <mat-option *ngFor="let relationship of this.relationships" [value]="relationship.relationshipId" >{{relationship.relationshipName}}</mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                </div>
+                            </div> 
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  
