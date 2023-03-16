@@ -20,6 +20,7 @@ import { AppointmentsDataComponent } from 'app/tabs/appointments-data/appointmen
 import { BillingComponent } from 'app/pages/finance/billing/billing.component';
 import { ViewLaboratoryComponent } from 'app/pages/facilities/laboratory/view-laboratory/view-laboratory.component';
 import { ViewDiagnosticImagingRequestComponent } from 'app/pages/facilities/diagnosticImaging/view-diagnostic-imaging-request/view-diagnostic-imaging-request.component';
+import { ViewOperationRequestComponent } from 'app/pages/facilities/operations/view-operation-request/view-operation-request.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -81,5 +82,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'appointment-data',    component: DentalComponent},
     { path: 'billing',    component: BillingComponent},    
     { path: 'laboratory',    component: ViewLaboratoryComponent},
-    { path: 'diagnostic-imaging',    component: ViewDiagnosticImagingRequestComponent}
+    { path: 'diagnostic-imaging',    component: ViewDiagnosticImagingRequestComponent},
+    { path: 'operations',   component: ViewOperationRequestComponent}
 ];

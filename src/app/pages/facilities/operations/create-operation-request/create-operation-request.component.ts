@@ -1,6 +1,6 @@
 
 import { Component, OnInit, Inject } from '@angular/core';
-import { OperationSubtype, OperationType } from 'app/models/Operation';
+import { OperationRequest, OperationSubtype, OperationType } from 'app/models/Operation';
 import { OperationService } from 'app/services/facilities/operation.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef  } from '@angular/material/dialog';
@@ -31,7 +31,7 @@ export class CreateOperationRequestComponent implements OnInit {
  
   async ngOnInit() {
     this.form = this.fb.group({
-      operationType: ['', Validators.required],
+      operationName: ['', Validators.required],
       operationSubType: ['', Validators.required],
       doctorRemarks: ['', Validators.required]
     });
@@ -55,7 +55,7 @@ export class CreateOperationRequestComponent implements OnInit {
 
       let newImagingType: OperationType = {
         operationTypeId: types.operationTypeId,
-        operationType: types.operationType        
+        operationName: types.operationName        
       }      
       operationTypesTemp.push(newImagingType);
     });
@@ -71,7 +71,7 @@ export class CreateOperationRequestComponent implements OnInit {
   
   async onSubmit(){
     const formData = this.form.value;
-    console.log("type: ",formData.operationType);  
+    console.log("type: ",formData.operationName);  
     console.log("subtype",formData.operationSubType); 
     console.log("remarks",formData.doctorRemarks);
 

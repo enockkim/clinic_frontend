@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Prescription } from '../../models/Pharmacy';
+import { Prescription, Inventory, InvetoryCategory } from '../../models/Pharmacy';
 
 const httpOptions1 = {
   headers: new HttpHeaders({
@@ -31,6 +31,21 @@ export class PharmacyService {
   async getPrescriptionsByAppointmentId(appointmentId: number): Promise<Prescription[]>{
     const url = `${this.apiUrl}/GetPrescriptionsByAppointmentId?appointmentId=${appointmentId}`;
     return await this.http.get<Prescription[]>(url).toPromise();
+  }
+  
+  async getInventory(): Promise<Inventory[]>{
+    const url = `${this.apiUrl}/GetInventory`;
+    return await this.http.get<Inventory[]>(url).toPromise();
+  }
+  
+  async getInventoryCategory(): Promise<InvetoryCategory[]>{
+    const url = `${this.apiUrl}/GetInventoryCategories`;
+    return await this.http.get<InvetoryCategory[]>(url).toPromise();
+  }
+
+  async addToPrescription(prescriptionItem: Prescription): Promise<Prescription>{
+    const url = `${this.apiUrl}/AddToPrescription`;
+    return await this.http.post<Prescription>(url, prescriptionItem).toPromise();
   }
 
   // deleteProject(Project: Project): Observable<Project> {

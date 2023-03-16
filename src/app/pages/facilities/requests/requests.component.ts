@@ -52,6 +52,7 @@ export class RequestsComponent implements OnInit {
   facilitiesResult: Facility[];
   finishedLabs: number[];
   finishedImaging: number[];
+  finishedOperation: number[];
   prefferedFacilty: number;
 
   FormData;
@@ -120,10 +121,18 @@ export class RequestsComponent implements OnInit {
         break;
       case 'operations':
         this.form = this.fb.group({
-          labResult: ['', Validators.required],
-          labTechRemarks: ['', Validators.required],
-          facility: [this.prefferedFacilty, Validators.required],
+          operatorRemarks: ['', Validators.required],
+          facility: ['', Validators.required],
         });
+        this.FormData = {
+          operationRequestId: null,
+          operationSubType: null,
+          appointmentId: null,
+          datetimeOfRequest: null,
+          doctorRemarks: null,
+          status: null,
+          operatorRemarks: null
+        };
         this.tableTitle = 'Operations';
         this.Data = await this.AppointmentService.getAppointments(1,5);
         break;
@@ -174,10 +183,26 @@ export class RequestsComponent implements OnInit {
     }
   }
 
+  async transferOperation(){
+    if(this.form.valid){
+      const formData = this.form.value;
+      this.FormData.operatorRemarks = formData.operatorRemarks;
+      this.FormData.status = formData.facility; //misusing property need to implement properly
+      
+      if(await this.operationService.transferOperationRequest(this.FormData)){
+        this.finishedOperation.push(this.FormData.labId);
+        this.DetailDataSource = new MatTableDataSource(this.DetailData.filter(operation => this.finishedOperation.includes(operation.operationRequestId) == false && operation.status == 0));
+      }else{
+        //error transferring
+      }
+    }
+  }
+
   async toggleRow(appointmentData: AppointmentData){
     //expand  row
     this.finishedLabs = null;
     this.finishedImaging = null;
+    this.finishedOperation = null;
     switch(appointmentData.appointmentType){
       case 1:
         this.prefferedFacilty = 15;

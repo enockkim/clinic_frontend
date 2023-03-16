@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { OperationRequest } from '../../models/Operation';
+import { OpType, OperationRequest, OperationType, OperationSubtype } from '../../models/Operation';
 
 const httpOptions1 = {
   headers: new HttpHeaders({
@@ -33,18 +33,27 @@ export class OperationService {
     return await this.http.get<OperationRequest[]>(url).toPromise();
   }
 
-  // deleteProject(Project: Project): Observable<Project> {
-  //   const url = `${this.apiUrl}/${Project.pId}`;
-  //   return this.http.delete<Project>(url);
+  async getOperationTypes(): Promise<OpType[]>{
+    const url = `${this.apiUrl}/GetOperationTypes`;
+    return await this.http.get<OpType[]>(url).toPromise();
+  }
+  
+  async createOperationRequest(request: OperationRequest){
+    const url = `${this.apiUrl}/CreateOperationRequest`;
+    return await this.http.post<OperationRequest>(url, request, httpOptions).toPromise();
+  }
+
+  async transferOperationRequest(request: OperationRequest){
+    const url = `${this.apiUrl}/TransferOperationRequest`;
+    return await this.http.post<OperationRequest>(url, request, httpOptions).toPromise();
+  }
+  // async createDiagnosticImagingRequest(request: DiagnosticImagingRequest){
+  //   const url = `${this.apiUrl}/CreateImagingRequest`;
+  //   return await this.http.post<DiagnosticImagingRequest>(url, request, httpOptions).toPromise();
   // }
 
-  // updateProjectReminder(Project: Project): Observable<Project> {    
-  //   const url = `${this.apiUrl}/${Project.pId}`;
-  //   return this.http.put<Project>(url, Project, httpOptions);
-  // }
-
-  // async addPatient(Appointment: Appointment): Promise<Appointment> {
-  //   const url = `${this.apiUrl}/AddAppointment`;
-  //   return await this.http.post<Appointment>(url, Appointment, httpOptions).toPromise();
+  // async transferDiagnosticImagingRequest(request: DiagnosticImagingRequest){
+  //   const url = `${this.apiUrl}/TransferDiagImg`;
+  //   return await this.http.post<DiagnosticImagingRequest>(url, request, httpOptions).toPromise();
   // }
 }

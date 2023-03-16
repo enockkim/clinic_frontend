@@ -15,6 +15,8 @@ import { MatSort } from '@angular/material/sort';
 import { EditRemarksComponent } from '../../pages/appointments/edit-remarks/edit-remarks.component';
 import { CreateLaboratoryRequestComponent } from '../../pages/facilities/laboratory/create-laboratory-request/create-laboratory-request.component';
 import { CreateDiagnosticImagingRequestComponent } from '../../pages/facilities/diagnosticImaging/create-diagnostic-imaging-request/create-diagnostic-imaging-request.component';
+import { CreateOperationRequestComponent } from '../../pages/facilities/operations/create-operation-request/create-operation-request.component';
+import { CreatePrescriptionItemComponent } from '../../pages/facilities/pharmacy/create-prescription-item/create-prescription-item.component';
 import { ServicesComponent } from '../services/services.component';
 
 
@@ -154,7 +156,7 @@ export class AppointmentsDataComponent implements OnInit {
   
   createOperationRequest(appointmentData: AppointmentData){
     console.log("calling dialog",appointmentData.appointmentId);
-    const dial = this.dialog.open(CreateDiagnosticImagingRequestComponent, {
+    const dial = this.dialog.open(CreateOperationRequestComponent, {
       data: { appointmentId: appointmentData.appointmentId },
       width: "50%",
       height: "",
@@ -163,6 +165,32 @@ export class AppointmentsDataComponent implements OnInit {
     dial.afterClosed()
     .subscribe(res => {
       console.log("add operation result, labid: "+res.labId);
+      if(res){
+        //find the index of the updated element
+        const index = this.appointments.findIndex(appointment => appointment.appointmentId === appointmentData.appointmentId);
+        // replace the element at that index with the updated appointment data
+        if (index !== -1) {
+          this.appointments[index] = res;
+          const labreq = res;
+          // this.servicesComponent.getData(2, appointmentData.appointmentId);
+          this.toggleRow(appointmentData);
+        }
+      }
+    })
+  }
+
+  
+  addPrescriptionItem(appointmentData: AppointmentData){
+    console.log("calling dialog",appointmentData.appointmentId);
+    const dial = this.dialog.open(CreatePrescriptionItemComponent, {
+      data: { appointmentId: appointmentData.appointmentId },
+      width: "50%",
+      height: "",
+    });
+
+    dial.afterClosed()
+    .subscribe(res => {
+      console.log("add presciption result, labid: "+res.prescriptionId);
       if(res){
         //find the index of the updated element
         const index = this.appointments.findIndex(appointment => appointment.appointmentId === appointmentData.appointmentId);

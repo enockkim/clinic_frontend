@@ -1,5 +1,5 @@
 export interface OperationRequest {
-  operationRequestId: number;
+  operationRequestId?: number;
   operationSubType?: number;
   appointmentId?: number;
   datetimeOfRequest?: Date;
@@ -8,20 +8,20 @@ export interface OperationRequest {
   operatorRemarks?: string;
 }
 
-export interface DiagnositcImagingType{
+export interface OperationType{
   operationName: string;
   operationTypeId: number;
 }
 
-export interface DiagnositcImagingSubtype{
-  imagingSubTypeId: number;
-  operationTypeId: string;
-  imagingTypeId: number;
+export interface OperationSubtype{
+  operationSubTypeId: number;
+  operationSubType: string;
+  operationTypeId: number;
   cost: number;
 }
 
-export interface ImagingType{
-  imagingTypeId: number;
-  imagingType: string;
-  subtypes: DiagnositcImagingSubtype[];
+export interface OpType{
+  operationTypeId: number;
+  operationName: string;
+  subtypes: OperationSubtype[];
 }

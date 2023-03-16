@@ -5,30 +5,37 @@
             <div class="col-lg-12 col-md-12 col-sm-12">-->
                 <div class="card">
                     <div class="card-header card-header-success">
-                        <h4 class="card-title">Operation Request</h4>
-                        <p class="card-category">Add Operation request below</p>
+                        <h4 class="card-title">Prescription Item</h4>
+                        <p class="card-category">Add Prescription item below</p>
                     </div>
                     <div class="card-body">
                         <form [formGroup]="form" (ngSubmit)="onSubmit()">
                             <div class="row">
                                 <div class="col-md-4">                                    
                                     <mat-form-field appearance="fill" class="example-full-width">
-                                        <mat-label>Operation Type</mat-label>
-                                        <mat-select formControlName="operationName" [(ngModel)]="typeIndex">
-                                        <mat-option *ngFor ="let operationType of this.operationTypes" [value]="operationType.operationTypeId" >{{operationType.operationName}}</mat-option>
+                                        <mat-label>Category</mat-label>
+                                        <mat-select formControlName="category" [(ngModel)]="typeIndex">
+                                        <mat-option *ngFor ="let category of this.invetoryCategory" [value]="category.categoryId" >{{category.categoryName}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">                                    
                                     <mat-form-field appearance="fill" class="example-full-width">
-                                        <mat-label>Operation Sub-Type</mat-label>
-                                        <mat-select formControlName="operationSubType">
-                                        <mat-option *ngFor ="let operationSubTypes of this.operationSubTypes[typeIndex]" [value]="operationSubTypes.operationSubTypeId" >{{operationSubTypes.operationSubType}}</mat-option>
+                                        <mat-label>Medication</mat-label>
+                                        <mat-select formControlName="inventory">
+                                        <mat-option *ngFor ="let inventory of this.inventory[typeIndex]" [value]="inventory.itemId" >{{inventory.brandName}} - {{inventory.medication}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
+                                <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <mat-label>Dosage</mat-label>
+                                    <input matInput formControlName="dosageNumber" placeholder="Dosage" type="text">
+                                  </mat-form-field>
+                                </div>
+                            </div>
                                 <div class="row"> 
-                                    <div class="col-md-12">
+                                    <div class="col-md-22">
                                     <mat-form-field class="example-full-width">
                                         <mat-label>Doctor Remarks</mat-label>
                                         <textarea 
@@ -40,7 +47,6 @@
                                     </mat-form-field>
                                     </div>
                                 </div>
-                            </div>
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Changes</button>
                             <div class="clearfix"></div>
                         </form>

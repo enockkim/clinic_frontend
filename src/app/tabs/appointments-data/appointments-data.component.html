@@ -44,11 +44,11 @@
 
             <mat-tab>
               <ng-template mat-tab-label>
-                <button mat-raised-button (click)="createOperationRequest(element)">Create Request</button>&nbsp;     
-                <button mat-raised-button (click)="transferToOperations(element)">Transfer Patient</button> 
                 <mat-icon class="example-tab-icon">airline_seat_flat</mat-icon>
                 &nbsp;Operations
               </ng-template>
+              <button mat-raised-button (click)="createOperationRequest(element)">Create Request</button>&nbsp;     
+              <!-- <button mat-raised-button (click)="transferToOperations(element)">Transfer Patient</button>  -->
               <app-services [data]="[element.appointmentId, 4]"></app-services>
             </mat-tab>
 
@@ -57,6 +57,7 @@
                 <mat-icon class="example-tab-icon">list</mat-icon>
                 &nbsp;Pharmacy
               </ng-template>
+              <button mat-raised-button (click)="addPrescriptionItem(element)">Create Prescription Item</button>&nbsp;   
               <app-services [data]="[element.appointmentId, 5]"></app-services>
             </mat-tab>
           

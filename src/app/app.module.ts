@@ -41,6 +41,8 @@ import { RequestsComponent } from './pages/facilities/requests/requests.componen
 import { CreateDiagnosticImagingRequestComponent } from './pages/facilities/diagnosticImaging/create-diagnostic-imaging-request/create-diagnostic-imaging-request.component';
 import { ViewDiagnosticImagingRequestComponent } from './pages/facilities/diagnosticImaging/view-diagnostic-imaging-request/view-diagnostic-imaging-request.component';
 import { CreateOperationRequestComponent } from './pages/facilities/operations/create-operation-request/create-operation-request.component';
+import { ViewOperationRequestComponent } from './pages/facilities/operations/view-operation-request/view-operation-request.component';
+import { CreatePrescriptionItemComponent } from './pages/facilities/pharmacy/create-prescription-item/create-prescription-item.component';
 
 @NgModule({
   imports: [
@@ -88,6 +90,8 @@ import { CreateOperationRequestComponent } from './pages/facilities/operations/c
     CreateDiagnosticImagingRequestComponent,
     ViewDiagnosticImagingRequestComponent,
     CreateOperationRequestComponent,
+    ViewOperationRequestComponent,
+    CreatePrescriptionItemComponent,
 
   ],
   providers: [],
