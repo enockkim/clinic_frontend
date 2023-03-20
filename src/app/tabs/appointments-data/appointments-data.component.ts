@@ -228,6 +228,14 @@ export class AppointmentsDataComponent implements OnInit {
       this.dataSource.data = this.appointments.filter(appointment => appointment.appointmentId != appointmentData.appointmentId);
     }
   }
+    
+  async transferToPharmacy(appointmentData: AppointmentData){
+    appointmentData.appointmentStatus = 12;
+    const res = await this.AppointmentService.tranferAppointment(appointmentData);
+    if(res){
+      this.dataSource.data = this.appointments.filter(appointment => appointment.appointmentId != appointmentData.appointmentId);
+    }
+  }
 }
 
 export interface User {

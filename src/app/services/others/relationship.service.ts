@@ -24,7 +24,7 @@ const httpOptions = {
 })
 export class RelationshipService {
 
-  private apiUrl = 'http://localhost:5000/Relationship';
+  private apiUrl = 'https://localhost:44320/Relationship';
 
   constructor(private http: HttpClient) { }
 

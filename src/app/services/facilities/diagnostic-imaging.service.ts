@@ -24,7 +24,7 @@ const httpOptions = {
 })
 export class DiagnositcImagingService {
 
-  private apiUrl = 'http://localhost:5000/DiagnosticImaging';
+  private apiUrl = 'https://localhost:44320/DiagnosticImaging';
 
   constructor(private http: HttpClient) { }
 

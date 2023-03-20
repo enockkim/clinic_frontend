@@ -21,6 +21,8 @@ import { BillingComponent } from 'app/pages/finance/billing/billing.component';
 import { ViewLaboratoryComponent } from 'app/pages/facilities/laboratory/view-laboratory/view-laboratory.component';
 import { ViewDiagnosticImagingRequestComponent } from 'app/pages/facilities/diagnosticImaging/view-diagnostic-imaging-request/view-diagnostic-imaging-request.component';
 import { ViewOperationRequestComponent } from 'app/pages/facilities/operations/view-operation-request/view-operation-request.component';
+import { ViewPrescriptionComponent } from '../../pages/facilities/pharmacy/view-prescription/view-prescription.component';
+import { ActivePatientsComponent } from '../../reports/patients/active-patients/active-patients.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -83,5 +85,8 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'billing',    component: BillingComponent},    
     { path: 'laboratory',    component: ViewLaboratoryComponent},
     { path: 'diagnostic-imaging',    component: ViewDiagnosticImagingRequestComponent},
-    { path: 'operations',   component: ViewOperationRequestComponent}
+    { path: 'operations', component: ViewOperationRequestComponent },
+    { path: 'internal-pharmacy', component: ViewPrescriptionComponent },
+    { path: 'active-patients-report', component: ActivePatientsComponent }
+
 ];

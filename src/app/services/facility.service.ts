@@ -24,7 +24,7 @@ const httpOptions = {
 })
 export class FacilityService {
 
-  private apiUrl = 'http://localhost:5000/Facility';
+  private apiUrl = 'https://localhost:44320/Facility';
 
   constructor(private http: HttpClient) { }
 

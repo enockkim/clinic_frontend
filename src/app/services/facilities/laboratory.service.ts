@@ -24,7 +24,7 @@ const httpOptions = {
 })
 export class LaboratoryService {
 
-  private apiUrl = 'http://localhost:5000/Laboratory';
+  private apiUrl = 'https://localhost:44320/Laboratory';
 
   constructor(private http: HttpClient) { }
 

@@ -24,7 +24,7 @@ const httpOptions = {
 })
 export class PaymentMethodService {
 
-  private apiUrl = 'http://localhost:5000/PaymentMethod';
+  private apiUrl = 'https://localhost:44320/PaymentMethod';
 
   constructor(private http: HttpClient) { }
 

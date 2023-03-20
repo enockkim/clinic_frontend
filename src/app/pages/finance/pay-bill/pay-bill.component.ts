@@ -27,7 +27,7 @@ export class PayBillComponent implements OnInit {
   form: FormGroup;
   title: string = "Pay Bill";
   description: string = "Complete the form to pay pending bill.";
-  button: string = "Save";
+  button: string = "Pay";
   response: Boolean;
 
   cashType: CashType[];

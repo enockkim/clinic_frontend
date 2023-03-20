@@ -24,7 +24,7 @@ const httpOptions = {
 })
 export class TriageService {
 
-  private apiUrl = 'http://localhost:5000/Vital';
+  private apiUrl = 'https://localhost:44320/Vital';
 
   constructor(private http: HttpClient) { }
 

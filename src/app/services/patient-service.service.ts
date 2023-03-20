@@ -23,8 +23,8 @@ const httpOptions = {
 })
 export class ProjectsService {
 
-  // private apiUrl = 'http://localhost:5000/Projects';
-  private apiUrl = 'http://localhost:5000/Patient';
+  // private apiUrl = 'https://localhost:44320/Projects';
+  private apiUrl = 'https://localhost:44320/Patient';
 
   constructor(private http: HttpClient) { }
 

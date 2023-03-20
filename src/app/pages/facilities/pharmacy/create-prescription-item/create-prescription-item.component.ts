@@ -63,15 +63,15 @@ export class CreatePrescriptionItemComponent implements OnInit {
     const formData = this.form.value;
     console.log("itemId: ",formData.inventory);  
     console.log("disageNumber",formData.dosageNumber); 
-    console.log("remarks",formData.remarks);
+    console.log("remarks", formData.doctorRemarks);
 
     if (this.form.valid) {
       const formData = this.form.value;
       let presciptionItem: Prescription = {
         appointmentId: this.data.appointmentId,
         itemId: formData.inventory,
-        dosageNumber: formData.dosageNumber,
-        remarks: formData.remarks,
+        dosageNumber: Number(formData.dosageNumber),
+        remarks: formData.doctorRemarks,
         status: 1,
         availability: null
       }

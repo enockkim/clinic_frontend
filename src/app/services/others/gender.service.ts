@@ -24,7 +24,7 @@ const httpOptions = {
 })
 export class GenderService {
 
-  private apiUrl = 'http://localhost:5000/Gender';
+  private apiUrl = 'https://localhost:44320/Gender';
 
   constructor(private http: HttpClient) { }
 

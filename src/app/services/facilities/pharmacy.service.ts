@@ -24,7 +24,7 @@ const httpOptions = {
 })
 export class PharmacyService {
 
-  private apiUrl = 'http://localhost:5000/Pharmacy';
+  private apiUrl = 'https://localhost:44320/Pharmacy';
 
   constructor(private http: HttpClient) { }
 

@@ -26,7 +26,7 @@ const httpOptions = {
 
 export class EmployeeService {
 
-  private apiUrl = 'http://localhost:5000/Employee';
+  private apiUrl = 'https://localhost:44320/Employee';
 
   constructor(private http: HttpClient) { }
 

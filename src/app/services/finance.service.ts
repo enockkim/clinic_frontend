@@ -26,7 +26,7 @@ const httpOptions = {
 
 export class FinanceService {
 
-  private apiUrl = 'http://localhost:5000/Finance';
+  private apiUrl = 'https://localhost:44320/Finance';
 
   constructor(private http: HttpClient) { }
 

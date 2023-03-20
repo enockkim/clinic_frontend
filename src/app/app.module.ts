@@ -17,7 +17,9 @@ import { ViewPatientsComponent } from './pages/patients/view-patients/view-patie
 import { MatTableModule } from '@angular/material/table';  
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
-import {MatIconModule} from '@angular/material/icon'; 
+import { MatIconModule } from '@angular/material/icon'; 
+
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 import { EditPatientModalComponent } from './pages/patients/edit-patient-modal/edit-patient-modal.component';
 import { NewEmployeeComponent } from './pages/employees/new-employee/new-employee.component';
@@ -43,6 +45,9 @@ import { ViewDiagnosticImagingRequestComponent } from './pages/facilities/diagno
 import { CreateOperationRequestComponent } from './pages/facilities/operations/create-operation-request/create-operation-request.component';
 import { ViewOperationRequestComponent } from './pages/facilities/operations/view-operation-request/view-operation-request.component';
 import { CreatePrescriptionItemComponent } from './pages/facilities/pharmacy/create-prescription-item/create-prescription-item.component';
+import { ViewPrescriptionComponent } from './pages/facilities/pharmacy/view-prescription/view-prescription.component';
+import { ActivePatientsComponent } from './reports/patients/active-patients/active-patients.component';
+import { ReceiptComponent } from './pages/finance/receipt/receipt.component';
 
 @NgModule({
   imports: [
@@ -63,7 +68,8 @@ import { CreatePrescriptionItemComponent } from './pages/facilities/pharmacy/cre
     MatTabsModule,
     MatIconModule,
     MatSortModule,
-    MatButtonModule 
+    MatButtonModule,
+    NgxExtendedPdfViewerModule
   ],
   declarations: [
     AppComponent,
@@ -92,6 +98,9 @@ import { CreatePrescriptionItemComponent } from './pages/facilities/pharmacy/cre
     CreateOperationRequestComponent,
     ViewOperationRequestComponent,
     CreatePrescriptionItemComponent,
+    ViewPrescriptionComponent,
+    ActivePatientsComponent,
+    ReceiptComponent,
 
   ],
   providers: [],

@@ -58,6 +58,7 @@
                 &nbsp;Pharmacy
               </ng-template>
               <button mat-raised-button (click)="addPrescriptionItem(element)">Create Prescription Item</button>&nbsp;   
+               <button mat-raised-button (click)="transferToPharmacy(element)">Transfer Patient</button>  
               <app-services [data]="[element.appointmentId, 5]"></app-services>
             </mat-tab>
           
