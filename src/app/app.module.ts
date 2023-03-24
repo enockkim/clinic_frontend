@@ -48,6 +48,9 @@ import { CreatePrescriptionItemComponent } from './pages/facilities/pharmacy/cre
 import { ViewPrescriptionComponent } from './pages/facilities/pharmacy/view-prescription/view-prescription.component';
 import { ActivePatientsComponent } from './reports/patients/active-patients/active-patients.component';
 import { ReceiptComponent } from './pages/finance/receipt/receipt.component';
+import { LoginPageComponent } from './pages/security/login-page/login-page.component';
+import { TriageComponent } from './pages/facilities/triage/triage.component';
+import { ViewConsultationsComponent } from './pages/facilities/consultation/view-consultations/view-consultations.component';
 
 @NgModule({
   imports: [
@@ -101,6 +104,9 @@ import { ReceiptComponent } from './pages/finance/receipt/receipt.component';
     ViewPrescriptionComponent,
     ActivePatientsComponent,
     ReceiptComponent,
+    LoginPageComponent,
+    TriageComponent,
+    ViewConsultationsComponent,
 
   ],
   providers: [],

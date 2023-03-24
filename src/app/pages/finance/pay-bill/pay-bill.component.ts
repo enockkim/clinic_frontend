@@ -4,6 +4,7 @@ import { Appointment, AppointmentData } from 'app/models/Appointment';
 import { CashType, PaymentDetails, AccountsReceivable } from 'app/models/finance';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FinanceService } from '../../../services/finance.service';
+import { ReceiptComponent } from '../../../pages/finance/receipt/receipt.component'
 
 @Component({
   selector: 'app-pay-bill',
@@ -20,7 +21,7 @@ export class PayBillComponent implements OnInit {
     }, 
     private fb: FormBuilder, 
     private FinanceService: FinanceService, 
-    dialog: MatDialog,
+    private dialog: MatDialog,
     public dialogRef: MatDialogRef<PayBillComponent>
     ) { }
 
@@ -29,6 +30,7 @@ export class PayBillComponent implements OnInit {
   description: string = "Complete the form to pay pending bill.";
   button: string = "Pay";
   response: Boolean;
+    transactionRef: string;
 
   cashType: CashType[];
   //paymentDetails: AccountsReceivable = null;
@@ -43,7 +45,7 @@ export class PayBillComponent implements OnInit {
     
     this.cashType = await this.FinanceService.getCashTypes();
   }
-
+    
   async onSubmit() {
     if (this.form.valid) {
       const formData = this.form.value;
@@ -57,12 +59,27 @@ export class PayBillComponent implements OnInit {
         dateOfTransaction: new Date(),
         paymentMethod: null
       }
+        console.log("here: ", formData.reference);
+        this.transactionRef = formData.reference;
+        console.log("here: ", this.transactionRef);
 
       const res = await this.FinanceService.payBill(paymentDetails);
-      
-      if(res){
-        this.dialogRef.close(this.data.billNo);
-      }else{  
+   
+        if (res) {
+
+            console.log("here: ", this.transactionRef);
+            const dial = this.dialog.open(ReceiptComponent, {
+                data: { transactionRef: this.transactionRef },
+                width: "50%",
+                height: "",
+            });
+
+            console.log("here: ", this.transactionRef);
+            dial.afterClosed()
+                .subscribe(res => {
+                    this.dialogRef.close(this.data.billNo);
+                })
+        }else{  
 
       }
       

@@ -11,13 +11,10 @@ const httpOptions1 = {
 }
 
 const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS'
-    // 'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-  })
+    headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+    })
 }
 
 @Injectable({
@@ -47,7 +44,7 @@ export class FinanceService {
 
   async payBill(paymentDetials: AccountsReceivable): Promise<boolean>{
     const url = `${this.apiUrl}/PayBill`;
-    const res = await this.http.post<boolean>(url, paymentDetials).toPromise();
+      const res = await this.http.post<boolean>(url, paymentDetials).toPromise();
     return res;
   }
 }

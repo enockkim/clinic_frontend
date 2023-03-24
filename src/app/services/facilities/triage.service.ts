@@ -33,6 +33,12 @@ export class TriageService {
     return await this.http.get<Vital[]>(url).toPromise();
   }
 
+
+    async transferFromTriage(request: Vital): Promise<boolean> {
+        const url = `${this.apiUrl}/TransferFromVital`;
+        return await this.http.post<boolean>(url, request, httpOptions).toPromise();
+    }
+
   // deleteProject(Project: Project): Observable<Project> {
   //   const url = `${this.apiUrl}/${Project.pId}`;
   //   return this.http.delete<Project>(url);

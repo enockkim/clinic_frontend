@@ -52,7 +52,8 @@ export class RequestsComponent implements OnInit {
   facilitiesResult: Facility[];
   finishedLabs: number[];
   finishedImaging: number[];
-  finishedOperation: number[];
+    finishedOperation: number[];
+    finishedTriage: number[];
   prefferedFacilty: number;
 
   FormData;
@@ -136,14 +137,30 @@ export class RequestsComponent implements OnInit {
         this.tableTitle = 'Operations';
         this.Data = await this.AppointmentService.getAppointments(1,5);
         break;
-      case 'vitals':
-        this.form = this.fb.group({
-          labResult: ['', Validators.required],
-          labTechRemarks: ['', Validators.required],
-          facility: [this.prefferedFacilty, Validators.required],
+      case 'triage':
+            this.form = this.fb.group({
+            temperature: ['', Validators.required],
+            pressure: ['', Validators.required],
+            respirationRate: ['', Validators.required],
+            weight: ['', Validators.required],
+            height: ['', Validators.required],
+            pulseRate: ['', Validators.required],
+            facility: ['', Validators.required]
         });
-        this.tableTitle = 'Vitals';
-        this.Data = await this.AppointmentService.getAppointments(1,10);
+            this.FormData = {
+                vRecordId: null,
+                timeTaken: new Date,
+                temperature: null,
+                pressure: null,
+                pulseRate: null,
+                respirationRate: null,
+                weight: null,
+                height: null,
+                appointmentId: null,
+                status: null
+                }
+            this.tableTitle = 'Triage';
+        this.Data = await this.AppointmentService.getAppointments(3,10);
         break;
     }
 
@@ -196,13 +213,34 @@ export class RequestsComponent implements OnInit {
         //error transferring
       }
     }
-  }
+    }
+
+    async transferFromTriage() {
+        console.log("transferFromTriage: ", this.FormData.vRecordId);
+        if (this.form.valid) {
+            const formData = this.form.value;
+            this.FormData.temperature = formData.temperature;
+            this.FormData.pressure = formData.pressure; 
+            this.FormData.pulseRate = formData.pulseRate;
+            this.FormData.respirationRate = formData.respirationRate;
+            this.FormData.weight = formData.weight;
+            this.FormData.height = formData.height;
+            this.FormData.status = formData.facility;  //misusing property need to implement properly
+            if (await this.triageService.transferFromTriage(this.FormData)) {
+                this.finishedTriage.push(this.FormData.vRecordId);
+                this.DetailDataSource = new MatTableDataSource(this.DetailData.filter(vital => this.finishedTriage.includes(vital.vRecordId) == false && vital.status == 0));
+            } else {
+                //error transferring
+            }
+        }
+    }
 
   async toggleRow(appointmentData: AppointmentData){
     //expand  row
     this.finishedLabs = null;
     this.finishedImaging = null;
-    this.finishedOperation = null;
+      this.finishedOperation = null;
+      this.finishedTriage = null;
     switch(appointmentData.appointmentType){
       case 1:
         this.prefferedFacilty = 15;
@@ -232,10 +270,10 @@ export class RequestsComponent implements OnInit {
         this.DetailDataSource = new MatTableDataSource(this.DetailData.filter(operation => operation.status == 0));
         this.DetailsColumnsToDisplay = ['operationRequestId', 'operationSubType', 'doctorRemarks', 'operatorRemarks', 'actions'];
         break;
-      case 'vitals':
+      case 'triage':
         this.DetailData = await this.triageService.getVitalsByAppointmentId(appointmentData.appointmentId);
         this.DetailDataSource = new MatTableDataSource(this.DetailData.filter(triage => triage.status == 0));
-        this.DetailsColumnsToDisplay = ['vRecordId', 'temperature', 'pressure', 'pulseRate', 'respirationRate', 'weight', 'height'];
+            this.DetailsColumnsToDisplay = ['vRecordId', 'temperature', 'pressure', 'pulseRate', 'respirationRate', 'weight', 'height', 'actions'];
         break;
     }
 

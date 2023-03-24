@@ -1,0 +1,26 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <mat-tab-group>
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <mat-icon class="example-tab-icon">person</mat-icon>
+                            &nbsp;Active Consultations
+                        </ng-template>
+                        <app-appointments-data [appointmentType]="3" [appointmentStatus]="1"></app-appointments-data>
+                    </mat-tab>
+
+                    <mat-tab>
+                        <ng-template mat-tab-label>
+                            <mat-icon class="example-tab-icon">list</mat-icon>
+                            &nbsp;Records
+                        </ng-template>
+                        <app-appointments-data [appointmentType]="3" [appointmentStatus]="0"></app-appointments-data>
+                    </mat-tab>
+
+                </mat-tab-group>
+            </div>
+        </div>
+    </div>
+</div>

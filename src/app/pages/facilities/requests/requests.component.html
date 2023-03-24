@@ -244,8 +244,72 @@
                                     <div class="clearfix"></div>
                                 </form>
                             </div>
-                            <div *ngSwitchCase="'vitals'">
-
+                            <div *ngSwitchCase="'triage'">
+                                <form [formGroup]="form" (ngSubmit)="transferFromTriage()">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Temperature</mat-label>
+                                                <input matInput value={{this.FormData.temperature}} type="text" placeholder="Temp" formControlName="temperature" >
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Pressure</mat-label>
+                                                <input matInput value={{this.FormData.pressure}} type="text" formControlName="pressure">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Pulse Rate</mat-label>
+                                                <input matInput value={{this.FormData.pulseRate}} type="text" formControlName="pulseRate">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Respiration Rate</mat-label>
+                                                <input matInput value={{this.FormData.respirationRate}} type="text" formControlName="respirationRate">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Weight</mat-label>
+                                                <input matInput value={{this.FormData.weight}} type="text" formControlName="weight">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-label>Height</mat-label>
+                                                <input matInput value={{this.FormData.height}} type="text" formControlName="height">
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <mat-form-field appearance="fill" class="example-full-width">
+                                                <mat-label>Transfer to: </mat-label>
+                                                <mat-select formControlName="facility">
+                                                    <mat-option *ngFor="let facility of this.facilitiesResult" [value]="facility.facilityId">{{facility.facilityName}}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <button mat-raised-button type="submit"
+                                            class="btn btn-danger pull-right">
+                                        {{button}}
+                                    </button>
+                                    <div class="clearfix"></div>
+                                </form>
                             </div>
                         </container-element>
                     </div>

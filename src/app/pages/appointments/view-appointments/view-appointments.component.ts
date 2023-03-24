@@ -43,7 +43,7 @@ export class ViewAppointmentsComponent implements OnInit {
 
   async ngOnInit() {
 
-    const appointmentResult = await this.AppointmentService.getAppointments(0, 1);
+    const appointmentResult = await this.AppointmentService.getAppointments(0, 0);
     console.log("appointments"+appointmentResult.length);
     this.dataSource.data = appointmentResult;
 
