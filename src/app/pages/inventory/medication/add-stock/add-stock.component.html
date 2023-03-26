@@ -1,0 +1,45 @@
+<!-- <p>create-diagnostic-imaging-request works!</p> -->
+<!-- <div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">-->
+<div class="card">
+    <div class="card-header card-header-success">
+        <h4 class="card-title">Prescription Item</h4>
+        <p class="card-category">Add Prescription item below</p>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Category</mat-label>
+                        <mat-select [(ngModel)]="typeIndex">
+                            <mat-option *ngFor="let category of this.invetoryCategory" [value]="category.categoryId">{{category.categoryName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Medication</mat-label>
+                        <mat-select formControlName="itemId">
+                            <mat-option *ngFor="let inventory of this.inventory[typeIndex]" [value]="inventory.itemId">{{inventory.brandName}} - {{inventory.medication}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-4">
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Stock</mat-label>
+                        <input matInput formControlName="stock" placeholder="Dosage" type="text">
+                    </mat-form-field>
+                </div>
+            </div>
+            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save Changes</button>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>
+<!-- </div>
+      </div>
+  </div>
+</div> -->

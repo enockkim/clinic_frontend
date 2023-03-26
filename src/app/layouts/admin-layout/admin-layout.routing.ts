@@ -26,6 +26,7 @@ import { ActivePatientsComponent } from '../../reports/patients/active-patients/
 import { ReceiptComponent } from '../../pages/finance/receipt/receipt.component';
 import { TriageComponent } from '../../pages/facilities/triage/triage.component';
 import { ViewConsultationsComponent } from '../../pages/facilities/consultation/view-consultations/view-consultations.component';
+import { MedicationComponent } from '../../pages/inventory/medication/medication.component';
 
 export const AdminLayoutRoutes: Routes = [
     // {
@@ -94,4 +95,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'receipt', component: ReceiptComponent },
     { path: 'triage', component: TriageComponent },
     { path: 'view-consultations', component: ViewConsultationsComponent },
+    { path: 'medication', component: MedicationComponent },
 ];

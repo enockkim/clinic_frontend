@@ -23,7 +23,7 @@ const httpOptions = {
 })
 export class ProjectsService {
 
-  // private apiUrl = 'https://localhost:44320/Projects';
+  // private apiUrl = 'https://www.prema.lol/Projects';
   private apiUrl = 'https://localhost:44320/Patient';
 
   constructor(private http: HttpClient) { }

@@ -9,18 +9,34 @@ export interface Prescription {
 }
 
 export interface Inventory{
-  itemId: number,
+  itemId?: number,
   category: number,
   brandName: string,
   medication: string,
   administrationType: number,
   unit: string,
   unitCost: number,
-  stock: number,
+  stock?: number,
   UnitOfMeasure: number
 }
 
 export interface InvetoryCategory{
   categoryId: number,
   categoryName: string
+}
+
+export interface UnitOfMeasure {
+    uomId: number,
+    uomName: number,
+    uomAbbreviation: string
+}   
+
+export interface AdministrationType {
+    administrationTypeId: number,
+    administrationType1: string
+}
+
+export interface AddStock {
+    itemId: number,
+    stock: number
 }

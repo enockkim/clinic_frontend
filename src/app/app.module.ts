@@ -51,6 +51,10 @@ import { ReceiptComponent } from './pages/finance/receipt/receipt.component';
 import { LoginPageComponent } from './pages/security/login-page/login-page.component';
 import { TriageComponent } from './pages/facilities/triage/triage.component';
 import { ViewConsultationsComponent } from './pages/facilities/consultation/view-consultations/view-consultations.component';
+import { MedicationComponent } from './pages/inventory/medication/medication.component';
+import { AddCategoryComponent } from './pages/inventory/medication/add-category/add-category.component';
+import { AddMedicationComponent } from './pages/inventory/medication/add-medication/add-medication.component';
+import { AddStockComponent } from './pages/inventory/medication/add-stock/add-stock.component';
 
 @NgModule({
   imports: [
@@ -107,6 +111,10 @@ import { ViewConsultationsComponent } from './pages/facilities/consultation/view
     LoginPageComponent,
     TriageComponent,
     ViewConsultationsComponent,
+    MedicationComponent,
+    AddCategoryComponent,
+    AddMedicationComponent,
+    AddStockComponent,
 
   ],
   providers: [],

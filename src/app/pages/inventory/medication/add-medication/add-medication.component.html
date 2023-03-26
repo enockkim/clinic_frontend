@@ -1,0 +1,64 @@
+<div class="card">
+    <div class="card-header card-header-success">
+        <h4 class="card-title">{{title}}</h4>
+        <p class="card-category">{{description}}</p>
+    </div>
+    <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-12">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Category Name</mat-label>
+                        <mat-select formControlName="category">
+                            <mat-option *ngFor="let category of this.categories" [value]="category.categoryId">{{category.categoryName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Brand Name</mat-label>
+                        <input matInput placeholder="Brand" formControlName="brandName" type="text">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-8">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Medication</mat-label>
+                        <input matInput placeholder="medication" formControlName="medication" type="text">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-12">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Administration Type</mat-label>
+                        <mat-select formControlName="administrationType">
+                            <mat-option *ngFor="let administrationType of this.administrationTypes" [value]="administrationType.administrationTypeId">{{administrationType.administrationType}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-8">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Unit</mat-label>
+                        <input matInput placeholder="Unit" formControlName="unit" type="text">
+                    </mat-form-field>
+                </div>
+                <div class="col-md-8">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Unit of Measure</mat-label>
+                        <mat-select formControlName="UnitOfMeasure">
+                            <mat-option *ngFor="let UnitOfMeasure of this.UnitOfMeasures" [value]="UnitOfMeasure.uomId">{{UnitOfMeasure.uomName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-md-8">
+                    <mat-form-field appearance="fill" class="example-full-width">
+                        <mat-label>Unit Cost</mat-label>
+                        <input matInput placeholder="unit cost" formControlName="unitCost" type="text">
+                    </mat-form-field>
+                </div>
+            </div>
+            <button mat-raised-button type="submit" class="btn btn-danger pull-right">{{button}}</button>
+            <div class="clearfix"></div>
+        </form>
+    </div>
+</div>

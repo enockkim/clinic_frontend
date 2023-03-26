@@ -47,7 +47,7 @@ export class ViewPrescriptionComponent implements OnInit {
     Data: AppointmentData[] = [];
     DetailData;
     DataColumnsToDisplay: string[] = ['appointmentId', 'patientId', 'patientName', 'employeeName', 'remarks', 'actions'];
-    DetailsColumnsToDisplay = ['itemId', 'dosageNumber', 'remarks', 'availability']
+    DetailsColumnsToDisplay = ['itemId', 'dosageNumber', 'remarks', 'availability', 'actions']
 
     columnsToDisplayWithExpand = [...this.DataColumnsToDisplay, 'expand'];
     //DetailsColumnsToDisplay: string[];  
