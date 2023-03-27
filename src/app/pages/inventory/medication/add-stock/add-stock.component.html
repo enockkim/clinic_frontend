@@ -14,7 +14,7 @@
                 <div class="col-md-4">
                     <mat-form-field appearance="fill" class="example-full-width">
                         <mat-label>Category</mat-label>
-                        <mat-select [(ngModel)]="typeIndex">
+                        <mat-select formControlName="category" [(ngModel)]="typeIndex">
                             <mat-option *ngFor="let category of this.invetoryCategory" [value]="category.categoryId">{{category.categoryName}}</mat-option>
                         </mat-select>
                     </mat-form-field>

@@ -64,5 +64,12 @@ export class AppointmentService {
     const url = `${this.apiUrl}/TransferAppointment`;
     const response = await this.http.post<boolean>(url, AppointmentData, httpOptions).toPromise();
     return response;
-  }
+    }
+
+
+    async clearPatient(appointmentId: number): Promise<boolean> {
+        const url = `${this.apiUrl}/ClearPatient?appointmentId=${appointmentId}`;
+        const response = await this.http.post<boolean>(url, httpOptions).toPromise();
+        return response;
+    }
 }

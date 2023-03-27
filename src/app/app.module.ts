@@ -55,6 +55,8 @@ import { MedicationComponent } from './pages/inventory/medication/medication.com
 import { AddCategoryComponent } from './pages/inventory/medication/add-category/add-category.component';
 import { AddMedicationComponent } from './pages/inventory/medication/add-medication/add-medication.component';
 import { AddStockComponent } from './pages/inventory/medication/add-stock/add-stock.component';
+import { ViewPrescriptionReportComponent } from './reports/pharmacy/view-prescription-report/view-prescription-report.component';
+import { ClearAppointmentComponent } from './pages/appointments/clear-appointment/clear-appointment.component';
 
 @NgModule({
   imports: [
@@ -115,6 +117,8 @@ import { AddStockComponent } from './pages/inventory/medication/add-stock/add-st
     AddCategoryComponent,
     AddMedicationComponent,
     AddStockComponent,
+    ViewPrescriptionReportComponent,
+    ClearAppointmentComponent,
 
   ],
   providers: [],

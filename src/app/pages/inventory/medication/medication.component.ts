@@ -104,14 +104,15 @@ export class MedicationComponent implements OnInit {
         dial.afterClosed()
             .subscribe(addedStock => {
                 if (addedStock) {
-                    const updatedInventory = this.inventory.map(obj => {
+                    this.inventory = this.inventory.map(obj => {
                         if (obj.itemId === addedStock.itemId) {
                             return { ...obj, stock: addedStock.stock };
                         }
                         return obj;
                     });
 
-                    this.DetailDataSource = new MatTableDataSource(updatedInventory);
+
+                    this.DetailDataSource = new MatTableDataSource(this.inventory.filter(i => i.category == addedStock.category));
                 }
             })
     }

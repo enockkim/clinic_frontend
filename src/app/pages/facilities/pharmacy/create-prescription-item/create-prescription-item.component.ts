@@ -25,7 +25,7 @@ export class CreatePrescriptionItemComponent implements OnInit {
   invetoryCategory: InvetoryCategory[] = [];
   inventory: Map<number, Inventory[]> = new Map<number, Inventory[]>(); 
   //operationSubTypesList: OperationSubtype[];
-  typeIndex: number = 1;
+  typeIndex: number;
   form: FormGroup;
  
   async ngOnInit() {

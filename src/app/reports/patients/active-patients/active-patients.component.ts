@@ -8,9 +8,9 @@ import { PatientsReportsService } from '../../../services/reports/patients-repor
 })
 export class ActivePatientsComponent implements OnInit {
 
-    pdfSource: any;
-
     constructor(private patientsReportsService: PatientsReportsService) { }
+
+    pdfSource: any;
 
     ngOnInit(): void {
         this.patientsReportsService.getActivePatients()

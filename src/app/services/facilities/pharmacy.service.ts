@@ -70,9 +70,9 @@ export class PharmacyService {
         return await this.http.get<UnitOfMeasure[]>(url).toPromise();
     }
 
-    async addStock(newStock: AddStock): Promise<number> {
+    async addStock(newStock: AddStock): Promise<Inventory> {
         const url = `${this.apiUrl}/AddStock`;
-        return await this.http.post<number>(url, newStock).toPromise();
+        return await this.http.post<Inventory>(url, newStock).toPromise();
     }
   // deleteProject(Project: Project): Observable<Project> {
   //   const url = `${this.apiUrl}/${Project.pId}`;

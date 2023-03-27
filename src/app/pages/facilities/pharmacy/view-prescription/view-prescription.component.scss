@@ -45,3 +45,75 @@ tr.example-element-row:not(.example-expanded-row):active {
 .example-element-description-attribution {
     opacity: 0.5;
 }
+
+
+.green-square {
+    width: 20px;
+    height: 20px;
+    background-color: green;
+    opacity: 0.2;
+}
+
+.red-square {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    opacity: 0.2;
+}
+
+.inStock {
+    background-color: darkgreen; /* Green with 50% opacity */
+    border-radius: 15px; /* Curved corners */
+    display: inline-block; /* Display as an inline block element */
+    text-align: center; /* Center the text horizontally */
+    font-weight: bold; /* Make the text bold */
+    color: white; /* Text color is white */
+    line-height: 1.2em; /* Set the line-height to match the font-size */
+    height: 1.2em; /* Set the height to match the font-size */
+    padding: 0 10px; /* Add some padding to the sides of the text */
+}
+
+.inStock::after {
+    content: "In Stock"; /* Add the text after the rectangle */
+}
+
+.outOfStock {
+    background-color: darkred; /* Green with 50% opacity */
+    border-radius: 15px; /* Curved corners */
+    display: inline-block; /* Display as an inline block element */
+    text-align: center; /* Center the text horizontally */
+    font-weight: bold; /* Make the text bold */
+    color: white; /* Text color is white */
+    line-height: 1.2em; /* Set the line-height to match the font-size */
+    height: 1.2em; /* Set the height to match the font-size */
+    padding: 0 10px; /* Add some padding to the sides of the text */
+}
+
+.outOfStock::after {
+    content: "Out of Stock"; /* Add the text after the rectangle */
+}
+.insufffientStock {
+    background-color: yellow; /* Green with 50% opacity */
+    border-radius: 15px; /* Curved corners */
+    display: inline-block; /* Display as an inline block element */
+    text-align: center; /* Center the text horizontally */
+    font-weight: bold; /* Make the text bold */
+    color: white; /* Text color is white */
+    line-height: 1.2em; /* Set the line-height to match the font-size */
+    height: 1.2em; /* Set the height to match the font-size */
+    padding: 0 10px; /* Add some padding to the sides of the text */
+}
+
+.insufffientStock::after {
+    content: "Insufficient Stock"; /* Add the text after the rectangle */
+}
+
+.print-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.print-button {
+    margin-left: 10px;
+}

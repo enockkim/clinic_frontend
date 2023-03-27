@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddStock, Inventory, InvetoryCategory } from '../../../../models/Pharmacy';
@@ -19,7 +19,7 @@ export class AddStockComponent implements OnInit {
     ) { }
 
     form: FormGroup;
-    typeIndex: number = 1;
+    typeIndex: number;
 
     invetoryCategory: InvetoryCategory[] = [];
     inventory: Map<number, Inventory[]> = new Map<number, Inventory[]>(); 
@@ -27,7 +27,8 @@ export class AddStockComponent implements OnInit {
     async ngOnInit() {
         this.form = this.fb.group({
             itemId: ['', Validators.required],
-            stock: ['', Validators.required]
+            stock: ['', Validators.required],
+            category: ['', Validators.required]
         });
 
         this.invetoryCategory = await this.pharmacyService.getInventoryCategory();

@@ -18,6 +18,9 @@ import { CreateOperationRequestComponent } from '../../../../pages/facilities/op
 import { CreatePrescriptionItemComponent } from '../../../../pages/facilities/pharmacy/create-prescription-item/create-prescription-item.component';
 import { ServicesComponent } from '../../../../tabs/services/services.component';
 import { PharmacyService } from '../../../../services/facilities/pharmacy.service';
+import { Prescription } from '../../../../models/Pharmacy';
+import { ViewPrescriptionReportComponent } from '../../../../reports/pharmacy/view-prescription-report/view-prescription-report.component';
+import { ClearAppointmentComponent } from '../../../appointments/clear-appointment/clear-appointment.component';
 
 @Component({
   selector: 'app-view-prescription',
@@ -43,7 +46,7 @@ export class ViewPrescriptionComponent implements OnInit {
 
     DataSource: MatTableDataSource<AppointmentData>;
     DetailDataSource;
-    prescriptionDataSource;
+    prescriptionDataSource: Prescription[] = [];
     Data: AppointmentData[] = [];
     DetailData;
     DataColumnsToDisplay: string[] = ['appointmentId', 'patientId', 'patientName', 'employeeName', 'remarks', 'actions'];
@@ -58,7 +61,8 @@ export class ViewPrescriptionComponent implements OnInit {
         public dialog: MatDialog,
         private cd: ChangeDetectorRef,
         private AppointmentService: AppointmentService,
-        private PharmacyService: PharmacyService
+        private PharmacyService: PharmacyService,    
+        private prescriptionDialog: MatDialog,
     ) { }
 
     appointments: AppointmentData[];
@@ -67,7 +71,7 @@ export class ViewPrescriptionComponent implements OnInit {
         // USERS.forEach(user => {
         //     this.usersData = [...this.usersData, {...user, addresses: new MatTableDataSource(user.addresses)}];
         // });
-        this.Data = await this.AppointmentService.getAppointments(this.appointmentType, this.appointmentStatus)
+        this.Data = await this.AppointmentService.getAppointments(this.appointmentType, this.appointmentStatus);
         this.DataSource = new MatTableDataSource(this.Data);
         //this.DataSource.sort = this.sort;
     }
@@ -97,4 +101,32 @@ export class ViewPrescriptionComponent implements OnInit {
             this.DataSource.data = this.appointments.filter(appointment => appointment.appointmentId != appointmentData.appointmentId);
         }
     }
+
+    async viewPrescription(prescription: Prescription) {
+        const dial = this.prescriptionDialog.open(ViewPrescriptionReportComponent, {
+            data: { appointmentId: prescription.appointmentId },
+            width: "50%",
+            height: "",
+        });
+    }
+
+    async clearPatient(prescription: Prescription) {
+        const dial = this.prescriptionDialog.open(ClearAppointmentComponent, {
+            data: { appointmentId: prescription.appointmentId },
+            width: "50%",
+            height: "",
+        });
+
+        dial.afterClosed()
+            .subscribe(res => {
+                if (res) {
+                    console.log("clearPatient: " + res);
+                    this.Data = this.Data.filter(appointment => appointment.appointmentId != prescription.appointmentId);
+                    this.DataSource = new MatTableDataSource(this.Data);
+                } else {
+                    //TODO show error
+                }
+            })
+    }
 }
+  

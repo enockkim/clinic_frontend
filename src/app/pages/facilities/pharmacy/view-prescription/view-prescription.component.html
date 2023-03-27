@@ -33,25 +33,50 @@
                                             <!-- Define columns to display -->
                                             <ng-container *ngFor="let column of DetailsColumnsToDisplay" [matColumnDef]="column">
                                                 <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
-                                                <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
-                                            </ng-container>
-
-                                            <!-- Add button column -->
-                                            <ng-container matColumnDef="actions">
-                                                <th mat-header-cell *matHeaderCellDef></th>
                                                 <td mat-cell *matCellDef="let element">
-                                                    <button mat-button >
-                                                        <mat-icon>keyboard_arrow_right </mat-icon>
-                                                    </button>
+                                                    <ng-container *ngIf="column === 'availability'; else otherColumns">
+                                                        <span *ngIf="element.availability === 1">
+                                                            <div class="inStock"></div>
+                                                        </span>
+                                                        <span *ngIf="element.availability === 0">
+                                                            <div class="outOfStock"></div>
+                                                        </span>
+                                                        <span *ngIf="element.availability === 2">
+                                                            <div class="insufficientStock"></div>
+                                                        </span>
+                                                    </ng-container>
+                                                    <ng-template #otherColumns>
+                                                        {{ element[column] }}
+                                                    </ng-template>
                                                 </td>
                                             </ng-container>
 
+
+                                            <!-- Add button column -->
+                                            <!--<ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-button>
+                    <mat-icon>keyboard_arrow_right </mat-icon>
+                </button>
+            </td>
+        </ng-container>-->
                                             <!-- Add columns to display -->
                                             <tr mat-header-row *matHeaderRowDef="DetailsColumnsToDisplay"></tr>
                                             <tr mat-row *matRowDef="let row; columns: DetailsColumnsToDisplay;"></tr>
                                             <tr mat-row *matRowDef="let row; columns: ['actions'];"></tr>
 
                                         </table>
+                                        <div class="print-button-container">
+                                            <button mat-icon-button class="print-button" (click)="clearPatient(element)">
+                                                <mat-icon>check_circle_outline</mat-icon>
+                                            </button>
+                                        </div>
+                                        <div class="print-button-container">
+                                            <button mat-icon-button class="print-button" (click)="viewPrescription(element)">
+                                                <mat-icon>print</mat-icon>
+                                            </button>
+                                        </div>
                                     </div>
                                 </td>
                             </ng-container>
