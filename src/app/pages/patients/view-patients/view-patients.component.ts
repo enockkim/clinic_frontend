@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {EditPatientModalComponent} from '../edit-patient-modal/edit-patient-modal.component';
 import { ProjectsService } from '../../../services/patient-service.service';
-import { Patient } from '../../../models/Patient';
+import { Patient, PatientData } from '../../../models/Patient';
 import { MatTableDataSource } from '@angular/material/table';
 
 // export interface PeriodicElement {
@@ -28,10 +28,12 @@ export class ViewPatientsComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private ProjectsService: ProjectsService) {}
 
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(EditPatientModalComponent, {
-      width: "100%",
-      height: ""
+    openDialog(enterAnimationDuration: string, exitAnimationDuration: string, patientData: Patient): void {
+        console.log("view",patientData.patientId);
+      this.dialog.open(EditPatientModalComponent, {
+          data: { patientData: patientData },
+         width: "100%",
+         height: "80%"
     });
   }
 

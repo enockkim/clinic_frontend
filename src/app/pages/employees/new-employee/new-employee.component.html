@@ -8,84 +8,81 @@
                         <p class="card-category">Complete the following form to add a new employee</p>
                     </div>
                     <div class="card-body">
-                        <form>
-                          <div class="row">
-                              <div class="col-md-2">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Employee ID" disabled>
-                                  </mat-form-field>
-                              </div>
-                          </div>
-                          <h3>Personal Information</h3>
+                        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    Employee ID: {{this.employeeId}}
+                                </div>
+                            </div>
+                            <h3>Personal Information</h3>
                             <div class="row">
                                 <div class="col-md-4">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Surname" formControlName="surname" type="text">
-                                  </mat-form-field>
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Surname" formControlName="surname" type="text">
+                                    </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Other Names" formControlName="otherName" type="text">
-                                  </mat-form-field>
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Other Names" formControlName="otherName" type="text">
+                                    </mat-form-field>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="National ID" formControlName="idNumber" type="text">
-                                  </mat-form-field>
-                                </div>
-                                <div class="col-md-3">
-                                  <mat-form-field appearance="fill" class="example-full-width">
-                                      <mat-label>Gender</mat-label>
-                                      <mat-select formControlName="gender">
-                                        <mat-option value=1>Male</mat-option>
-                                        <mat-option value=1>Female</mat-option>
-                                      </mat-select>
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="National ID" formControlName="idNumber" type="text">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-3">
-                                  <mat-form-field appearance="fill">
-                                    <mat-label>Date of Birth</mat-label>
-                                    <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
-                                    <mat-hint>MM/DD/YYYY</mat-hint>
-                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker>
-                                  </mat-form-field>
+                                    <mat-form-field appearance="fill" class="example-full-width">
+                                        <mat-label>Gender</mat-label>
+                                        <mat-select formControlName="gender">
+                                            <mat-option *ngFor="let gender of this.genders" [value]="gender.id">{{gender.genderName}}</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-3">
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Date of Birth</mat-label>
+                                        <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+                                        <mat-hint>MM/DD/YYYY</mat-hint>
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
                                 </div>
                             </div>
                             <h3>Contact</h3>
                             <div class="row">
                                 <div class="col-md-3">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Email" formControlName="email" type="text">
-                                  </mat-form-field>
-                                </div>                             
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Email" formControlName="email" type="text">
+                                    </mat-form-field>
+                                </div>
                                 <div class="col-md-4">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Phone Number" formControlName="contact" type="text">
-                                  </mat-form-field>
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Phone Number" formControlName="contact" type="text">
+                                    </mat-form-field>
                                 </div>
                             </div>
                             <h3>Place of Residence</h3>
                             <div class="row">
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                      <input matInput placeholder="Address" formControlName="address" type="email">
+                                        <input matInput placeholder="Address" formControlName="address" type="email">
                                     </mat-form-field>
                                 </div>
                             </div>
                             <h3>Next of Kin</h3>
                             <div class="row">
                                 <div class="col-md-4">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Name" formControlName="nokName" type="text">
-                                  </mat-form-field>
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Name" formControlName="nokName" type="text">
+                                    </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
-                                  <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Contact" formControlName="nokContact" type="text">
-                                  </mat-form-field>
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Contact" formControlName="nokContact" type="text">
+                                    </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field appearance="fill" class="example-full-width">
@@ -100,32 +97,28 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <mat-form-field appearance="fill" class="example-full-width">
-                                        <mat-label>Employment Type</mat-label>
-                                        <mat-select formControlName="surname">
-                                          <mat-option value="one">Contract</mat-option>
-                                          <mat-option value="two">Permanent</mat-option>
-                                          <mat-option value="two">Consultancy</mat-option>
+                                        <mat-label>Employee Type</mat-label>
+                                        <mat-select formControlName="employeeType">
+                                            <mat-option *ngFor="let employeeType of this.employeeTypes" [value]="employeeType.employmentTypeId">{{employeeType.employmentType}}</mat-option>
                                         </mat-select>
-                                      </mat-form-field>
+                                    </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field appearance="fill" class="example-full-width">
                                         <mat-label>Designation</mat-label>
                                         <mat-select formControlName="designationId">
-                                          <mat-option value="one">Doctor</mat-option>
-                                          <mat-option value="two">Nurse</mat-option>
-                                          <mat-option value="two">Accountant</mat-option>
+                                            <mat-option *ngFor="let disignation of this.designations" [value]="disignation.designationId">{{disignation.type}}</mat-option>
                                         </mat-select>
-                                      </mat-form-field>
+                                    </mat-form-field>
                                 </div>
                                 <div class="col-md-3">
-                                  <mat-form-field appearance="fill">
-                                    <mat-label>Starting Date</mat-label>
-                                    <input matInput [matDatepicker]="picker" formControlName="startDate">
-                                    <mat-hint>MM/DD/YYYY</mat-hint>
-                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                    <mat-datepicker #picker></mat-datepicker>
-                                  </mat-form-field>
+                                    <mat-form-field appearance="fill">
+                                        <mat-label>Starting Date</mat-label>
+                                        <input matInput [matDatepicker]="picker" formControlName="startDate">
+                                        <mat-hint>MM/DD/YYYY</mat-hint>
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </mat-form-field>
                                 </div>
                             </div>
                             <button mat-raised-button type="submit" class="btn btn-danger pull-right">Save</button>

@@ -23,7 +23,7 @@ const httpOptions = {
 })
 export class ProjectsService {
 
-  // private apiUrl = 'https://www.prema.lol/Projects';
+  // private apiUrl = 'https://localhost:44320/Projects';
   private apiUrl = 'https://localhost:44320/Patient';
 
   constructor(private http: HttpClient) { }
@@ -47,4 +47,10 @@ export class ProjectsService {
     const url = `${this.apiUrl}/AddPatient`;
     return await this.http.post<PatientData>(url, Patient, httpOptions).toPromise();
   }
+
+
+    async updatePatient(Patient: PatientData): Promise<PatientData> {
+        const url = `${this.apiUrl}/UpdatePatient`;
+        return await this.http.post<PatientData>(url, Patient, httpOptions).toPromise();
+    }
 }

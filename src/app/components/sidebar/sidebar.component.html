@@ -234,6 +234,26 @@
                     </a>
                 </li>
             </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <i class="material-icons">person</i>
+                        <p>Reports</p>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <li routerLinkActive="active" class="nav-item">
+                    <a class="nav-link" [routerLink]="'/medication-list'">
+                        <i class="material-icons">person</i>
+                        <p>Medication</p>
+                    </a>
+                </li>
+                <li routerLinkActive="active" class="nav-item">
+                    <a class="nav-link" [routerLink]="'/active-patients-report'">
+                        <i class="material-icons">person</i>
+                        <p>Patients</p>
+                    </a>
+                </li>
+            </mat-expansion-panel>
         </mat-accordion>
     </ul>
 </div>

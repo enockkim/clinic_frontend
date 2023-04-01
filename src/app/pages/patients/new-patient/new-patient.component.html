@@ -59,51 +59,43 @@
                                 </div>
                             </div>
                             <h3>Contact</h3>
-                            <div class="row">
-                                <div class="col-md-3">
-                                  <!-- <mat-form-field class="example-full-width">
-                                    <input matInput placeholder="Email" type="text">
-                                  </mat-form-field> -->
-                                </div>                             
+                            <div class="row">                      
                                 <div class="col-md-4">
                                   <mat-form-field class="example-full-width">
                                     <input matInput placeholder="Phone Number" formControlName="contact" type="text">
                                   </mat-form-field>
                                 </div>
-                              <!--   <div class="col-md-4">
+                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                      <input matInput placeholder="Email address" type="email">
+                                      <input matInput placeholder="Email" formControlName="email" type="email">
                                     </mat-form-field>
-                                </div>-->
+                                </div>
                             </div>
                             <h3>Place of Residence</h3>
                             <div class="row">
                                 <div class="col-md-4">
                                     <mat-form-field appearance="fill" class="example-full-width">
                                         <mat-label>County</mat-label>
-                                        <mat-select formControlName="county">
-                                          <mat-option value=1>Nairobi</mat-option>
-                                          <mat-option value=2>Mombasa</mat-option>
+                                        <mat-select formControlName="county" [(ngModel)]="countyIndex" (ngModelChange)="subcounty(countyIndex)">
+                                            <mat-option *ngFor="let county of this.counties" [value]="county.id">{{county.county_name}}</mat-option>
                                         </mat-select>
-                                      </mat-form-field>
-                                </div>
+                                    </mat-form-field>
+                                </div> 
                                 <div class="col-md-4">
                                     <mat-form-field appearance="fill" class="example-full-width">
                                         <mat-label>Sub-County</mat-label>
-                                        <mat-select formControlName="subcounty">
-                                          <mat-option value=1>Embakasi East</mat-option>
-                                          <mat-option value=2>Mombasa</mat-option>
+                                        <mat-select formControlName="subcounty" [(ngModel)]="subcountyIndex" (ngModelChange)="ward(subcountyIndex)">
+                                            <mat-option *ngFor="let subcounty of this.subcountiesFiltered" [value]="subcounty.subcountyId">{{subcounty.subcountyName}}</mat-option>
                                         </mat-select>
-                                      </mat-form-field>
+                                    </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field appearance="fill" class="example-full-width">
                                         <mat-label>Constituency</mat-label>
                                         <mat-select formControlName="ward">
-                                          <mat-option value=1>Embakasi</mat-option>
-                                          <mat-option value=2>Mombasa</mat-option>
+                                            <mat-option *ngFor="let ward of this.wardsFiltered" [value]="ward.id">{{ward.ward}}</mat-option>
                                         </mat-select>
-                                      </mat-form-field>
+                                    </mat-form-field>
                                 </div>
                             </div>
                             <!--<h3>Occupation</h3>

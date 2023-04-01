@@ -15,6 +15,7 @@ export interface Patient {
     subcounty: number;
     ward: number;
     status: number;
+    email: string;
   }
 
 

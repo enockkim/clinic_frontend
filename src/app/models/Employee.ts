@@ -17,11 +17,22 @@ export interface Employee {
   nokName: string,
   nokContact: number,
   nokRelationship: number,
-  idNumber: number
+    idNumber: number,
+    employmentType: number
 }
 
 
 export interface EmployeeData {
   employeeData: Employee;
   userData: User;
+}
+
+export interface Desigation {
+    designationId: number;
+    type: string;
+}
+
+export interface EmploymentType {
+    employmentTypeId: number;
+    employmentType: string;
 }

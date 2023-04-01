@@ -18,6 +18,7 @@ import { MatTableModule } from '@angular/material/table';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon'; 
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
@@ -57,6 +58,7 @@ import { AddMedicationComponent } from './pages/inventory/medication/add-medicat
 import { AddStockComponent } from './pages/inventory/medication/add-stock/add-stock.component';
 import { ViewPrescriptionReportComponent } from './reports/pharmacy/view-prescription-report/view-prescription-report.component';
 import { ClearAppointmentComponent } from './pages/appointments/clear-appointment/clear-appointment.component';
+import { MedicationListComponent } from './reports/pharmacy/medication-list/medication-list.component';
 
 @NgModule({
   imports: [
@@ -78,7 +80,8 @@ import { ClearAppointmentComponent } from './pages/appointments/clear-appointmen
     MatIconModule,
     MatSortModule,
     MatButtonModule,
-    NgxExtendedPdfViewerModule
+        NgxExtendedPdfViewerModule,
+        MatSnackBarModule
   ],
   declarations: [
     AppComponent,
@@ -119,6 +122,7 @@ import { ClearAppointmentComponent } from './pages/appointments/clear-appointmen
     AddStockComponent,
     ViewPrescriptionReportComponent,
     ClearAppointmentComponent,
+    MedicationListComponent,
 
   ],
   providers: [],

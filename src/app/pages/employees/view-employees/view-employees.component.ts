@@ -4,7 +4,7 @@ import { EditEmployeeModalComponent } from '../edit-employee-modal/edit-employee
 import { EmployeeService } from '../../../services/employee.service';
 import { Patient } from '../../../models/Patient';
 import { MatTableDataSource } from '@angular/material/table';
-import { Employee } from 'app/models/Employee';
+import { Employee, EmployeeData } from 'app/models/Employee';
 
 // export interface PeriodicElement {
 //   name: string;
@@ -29,10 +29,11 @@ export class ViewEmployeesComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private EmployeeService: EmployeeService) {}
 
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
-    this.dialog.open(EditEmployeeModalComponent, {
-      width: "100%",
-      height: ""
+    openDialog(enterAnimationDuration: string, exitAnimationDuration: string, employeeData: Employee): void {
+        this.dialog.open(EditEmployeeModalComponent, {
+            data: { employeeData: employeeData },
+      width: "80%",
+      height: "80%"
     });
   }
 

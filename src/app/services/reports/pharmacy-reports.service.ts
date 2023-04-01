@@ -16,6 +16,11 @@ export class PharmacyReportsService {
         this.srvURL = this.reportServer + 'api/Reports/Pharmacy/GetPrescription?appointmentId=' + appointmentId;
         return this.httpClient.get(this.srvURL, { responseType: "blob" });
     }
+
+    getMedicationList(): Observable<any> {
+        this.srvURL = this.reportServer + 'api/Reports/Pharmacy/GetMedicationList';
+        return this.httpClient.get(this.srvURL, { responseType: "blob" });
+    }
 }
 
 

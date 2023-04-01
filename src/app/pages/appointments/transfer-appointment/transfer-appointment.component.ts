@@ -14,7 +14,12 @@ import { AppointmentService } from '../../../services/appointment.service';
 })
 export class TransferAppointmentComponent implements OnInit {
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: {action_type: number, appointmentData: AppointmentData, facilities: Facility[], paymentMethods: PaymentMethod[]}, private fb: FormBuilder, private AppointmentService: AppointmentService, dialog: MatDialog,public dialogRef: MatDialogRef<TransferAppointmentComponent>) { }
+    constructor(
+        @Inject(MAT_DIALOG_DATA) public data: { action_type: number, appointmentData: AppointmentData, facilities: Facility[], paymentMethods: PaymentMethod[] },
+        private fb: FormBuilder,
+        private AppointmentService: AppointmentService,
+        dialog: MatDialog,
+        public dialogRef: MatDialogRef<TransferAppointmentComponent>) { }
 
   form: FormGroup;
   // patientData = {} as PatientData;
