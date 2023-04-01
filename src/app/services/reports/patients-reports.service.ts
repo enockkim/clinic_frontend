@@ -17,7 +17,6 @@ export class PatientsReportsService {
 
     getActivePatients(): Observable<any> {
         this.srvURL = this.reportServer + 'api/Reports/Patient/GetPatientList';
-
         return this.httpClient.get(this.srvURL, { responseType: "blob" });
     }
 
