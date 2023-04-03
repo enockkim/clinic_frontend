@@ -5,6 +5,7 @@ import { CashType, PaymentDetails, AccountsReceivable } from 'app/models/finance
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FinanceService } from '../../../services/finance.service';
 import { ReceiptComponent } from '../../../pages/finance/receipt/receipt.component'
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-pay-bill',
@@ -22,7 +23,8 @@ export class PayBillComponent implements OnInit {
     private fb: FormBuilder, 
     private FinanceService: FinanceService, 
     private dialog: MatDialog,
-    public dialogRef: MatDialogRef<PayBillComponent>
+      public dialogRef: MatDialogRef<PayBillComponent>,
+        private _snackBar: MatSnackBar,
     ) { }
 
   form: FormGroup;
@@ -68,6 +70,12 @@ export class PayBillComponent implements OnInit {
         if (res) {
 
             console.log("here: ", this.transactionRef);
+            this._snackBar.open('Payment completed successfully. Generating reciept...', 'Ok', {
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+                duration: 5 * 1000,
+            });
+
             const dial = this.dialog.open(ReceiptComponent, {
                 data: { transactionRef: this.transactionRef },
                 width: "50%",
@@ -80,7 +88,11 @@ export class PayBillComponent implements OnInit {
                     this.dialogRef.close(this.data.billNo);
                 })
         }else{  
-
+            this._snackBar.open('Error completing payment. Pleas try again or contact a system administrator.', 'Ok', {
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+                duration: 5 * 1000,
+            });
       }
       
     }

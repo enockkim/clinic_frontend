@@ -19,6 +19,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatTabsModule} from '@angular/material/tabs';
 import { MatIconModule } from '@angular/material/icon'; 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
@@ -83,7 +84,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
     MatButtonModule,
         NgxExtendedPdfViewerModule,
         MatSnackBarModule,
-        MatPaginatorModule
+        MatPaginatorModule,
+        MatNativeDateModule
   ],
   declarations: [
     AppComponent,

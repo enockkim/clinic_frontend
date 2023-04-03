@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { Bill, BillDetail, CashType, PaymentDetails, AccountsReceivable } from '../models/Finance';
+import { Bill, BillDetail, CashType, PaymentDetails, AccountsReceivable, BillData } from '../models/Finance';
 
 
 const httpOptions1 = {
@@ -31,6 +31,11 @@ export class FinanceService {
     const url = `${this.apiUrl}/GetBills`;
     return await this.http.get<Bill[]>(url).toPromise();
   }
+
+    async getBillData(): Promise<BillData[]> {
+        const url = `${this.apiUrl}/GetBillData`;
+        return await this.http.get<BillData[]>(url).toPromise();
+    }
 
   async getBillDetails(billNo: number): Promise<BillDetail[]>{
     const url = `${this.apiUrl}/GetBillDetailsByBillNo?billNo=${billNo}`;

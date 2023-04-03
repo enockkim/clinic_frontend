@@ -48,9 +48,9 @@ export class AppointmentService {
   //   return await this.http.post<Appointment>(url, Appointment, httpOptions).toPromise();
   // }
 
-  async transferPatient(AppointmentData: AppointmentData): Promise<boolean> {
+  async transferPatient(AppointmentData: AppointmentData): Promise<number> {
     const url = `${this.apiUrl}/TransferPatient`;
-    const response = await this.http.post<boolean>(url, AppointmentData, httpOptions).toPromise();
+    const response = await this.http.post<number>(url, AppointmentData, httpOptions).toPromise();
     return response;
   }
 

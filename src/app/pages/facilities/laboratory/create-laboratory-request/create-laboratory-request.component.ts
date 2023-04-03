@@ -3,6 +3,7 @@ import { LaboratoryService } from '../../../../services/facilities/laboratory.se
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef  } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LaboratoryRequest, LaboratoryTypes } from 'app/models/Laboratory';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class CreateLaboratoryRequestComponent implements OnInit {
     private fb: FormBuilder,
     private LaboratoryService: LaboratoryService,
     dialog: MatDialog,
-    public dialogRef: MatDialogRef<CreateLaboratoryRequestComponent>
+      public dialogRef: MatDialogRef<CreateLaboratoryRequestComponent>,
+      private _snackBar: MatSnackBar,
   ) { }
   
   form: FormGroup;
@@ -45,13 +47,22 @@ export class CreateLaboratoryRequestComponent implements OnInit {
         status: 0,
       }
       const res = await this.LaboratoryService.createLaboratoryRequest(laboratoryRequestData);
-      if(res){
-        //laboratoryRequestData.labId = Number(res);
-        console.log("lab: "+res);
-        this.dialogRef.close(res);
-      }else{  
-
-      }      
+        if (res) {
+            //laboratoryRequestData.labId = Number(res);
+            console.log("lab: " + res);
+            this._snackBar.open('Laboratory request created successfully.', 'Ok', {
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+                duration: 5 * 1000,
+            });
+            this.dialogRef.close(res);
+        } else {
+            this._snackBar.open('Error creating request. Please try again or contact a system administrator.', 'Ok', {
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+                duration: 5 * 1000,
+            });
+        }       
     }
   }
 }

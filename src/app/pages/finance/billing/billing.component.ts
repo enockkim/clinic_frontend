@@ -4,7 +4,7 @@ import { MatTableDataSource, MatTable } from '@angular/material/table';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { MatSort } from '@angular/material/sort';
-import { Bill, BillDetail } from '../../../models/Finance';
+import { Bill, BillData, BillDetail } from '../../../models/Finance';
 import { PayBillComponent } from '../../../pages/finance/pay-bill/pay-bill.component'
 
 @Component({
@@ -27,12 +27,14 @@ export class BillingComponent implements OnInit {
     private FinanceService: FinanceService
   ) { }
 
-  billData: Bill[];
-  billDataSource: MatTableDataSource<Bill>;
+  //billData: Bill[];
+  billData: BillData[];
+  //billDataSource: MatTableDataSource<Bill>;
+  billDataSource: MatTableDataSource<BillData>;
   billDetailData: BillDetail[];
   billDetailDataSource: MatTableDataSource<BillDetail>;
 
-  billDataColumnsToDisplay: string[] = ['billNo', 'appointmentId'];
+  billDataColumnsToDisplay: string[] = ['billNo', 'appointmentId', 'patientId', 'patientIdNumber', 'patientName'];
   billDetailsColumnsToDisplay: string[] = ['entryNo', 'facility', 'details', 'cost'];  
   columnsToDisplayWithExpand = [...this.billDataColumnsToDisplay, 'expand'];
 
@@ -41,13 +43,14 @@ export class BillingComponent implements OnInit {
   // billTotal: number = 0;
 
   async ngOnInit() {
-      this.billData = await this.FinanceService.getBills()  
+      //this.billData = await this.FinanceService.getBills()  
+      this.billData = await this.FinanceService.getBillData()  
       this.billData.sort((a, b) => (a.billNo > b.billNo ? -1 : 1));
     this.billDataSource = new MatTableDataSource(this.billData.filter(bill => bill.status == 0));
     // this.billDataSource.sort = this.sort;
   }
 
-  async toggleRow(element: Bill) {
+  async toggleRow(element: BillData) {
     this.billDetailDataSource = null;
     this.billDetailData = await this.FinanceService.getBillDetails(Number(element.billNo)); 
     this.billDetailDataSource = new MatTableDataSource(this.billDetailData.filter(billDetail => billDetail.status == 0));

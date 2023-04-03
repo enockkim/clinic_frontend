@@ -4,6 +4,7 @@ import { OperationRequest, OperationSubtype, OperationType } from 'app/models/Op
 import { OperationService } from 'app/services/facilities/operation.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef  } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-operation-request',
@@ -20,7 +21,8 @@ export class CreateOperationRequestComponent implements OnInit {
     private fb: FormBuilder,
     public operationService: OperationService,
     dialog: MatDialog,
-    public dialogRef: MatDialogRef<CreateOperationRequestComponent>
+      public dialogRef: MatDialogRef<CreateOperationRequestComponent>,
+        private _snackBar: MatSnackBar,
   ) { }
 
   operationTypes: OperationType[] = [];
@@ -85,13 +87,22 @@ export class CreateOperationRequestComponent implements OnInit {
       }
       console.log("appointmentId",this.data.appointmentId);
       const res = await this.operationService.createOperationRequest(operationRequest);
-      if(res){
-        //laboratoryRequestData.labId = Number(res);
-        console.log("operation: "+res); 
-        this.dialogRef.close(res);
-      }else{  
-
-      }      
+        if (res) {
+            //laboratoryRequestData.labId = Number(res);
+            console.log("lab: " + res);
+            this._snackBar.open('Operation request created successfully.', 'Ok', {
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+                duration: 5 * 1000,
+            });
+            this.dialogRef.close(res);
+        } else {
+            this._snackBar.open('Error creating request. Please try again or contact a system administrator.', 'Ok', {
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+                duration: 5 * 1000,
+            });
+        }       
     }
   }
 }

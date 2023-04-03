@@ -3,6 +3,7 @@ import { Prescription, Inventory, InvetoryCategory} from 'app/models/Pharmacy';
 import { PharmacyService } from 'app/services/facilities/pharmacy.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef  } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-prescription-item',
@@ -19,7 +20,8 @@ export class CreatePrescriptionItemComponent implements OnInit {
     private fb: FormBuilder,
     public pharmacyService: PharmacyService,
     dialog: MatDialog,
-    public dialogRef: MatDialogRef<CreatePrescriptionItemComponent>
+      public dialogRef: MatDialogRef<CreatePrescriptionItemComponent>,
+      private _snackBar: MatSnackBar,
   ) { }
 
   invetoryCategory: InvetoryCategory[] = [];
@@ -77,13 +79,22 @@ export class CreatePrescriptionItemComponent implements OnInit {
       }
       console.log("appointmentId",this.data.appointmentId);
       const res = await this.pharmacyService.addToPrescription(presciptionItem);
-      if(res){
-        //laboratoryRequestData.labId = Number(res);
-        console.log("pharmacy: "+res); 
-        this.dialogRef.close(res);
-      }else{  
-
-      }      
+        if (res) {
+            //laboratoryRequestData.labId = Number(res);
+            console.log("pharmacy: " + res);
+            this._snackBar.open('Item added to presctiption successfully.', 'Ok', {
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+                duration: 5 * 1000,
+            });
+            this.dialogRef.close(res);
+        } else {
+            this._snackBar.open('Error creating request. Please try again or contact a system administrator.', 'Ok', {
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+                duration: 5 * 1000,
+            });
+        }       
     }
   }
 }

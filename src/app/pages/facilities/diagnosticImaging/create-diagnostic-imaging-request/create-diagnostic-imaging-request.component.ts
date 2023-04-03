@@ -3,6 +3,7 @@ import { DiagnositcImagingSubtype, DiagnositcImagingType, DiagnosticImagingReque
 import { DiagnositcImagingService } from 'app/services/facilities/diagnostic-imaging.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef  } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-create-diagnostic-imaging-request',
@@ -19,7 +20,8 @@ export class CreateDiagnosticImagingRequestComponent implements OnInit {
     private fb: FormBuilder,
     public diagnosticImagingService: DiagnositcImagingService,
     dialog: MatDialog,
-    public dialogRef: MatDialogRef<CreateDiagnosticImagingRequestComponent>
+      public dialogRef: MatDialogRef<CreateDiagnosticImagingRequestComponent>,
+      private _snackBar: MatSnackBar,
   ) { }
 
   imagingTypes: DiagnositcImagingType[] = [];
@@ -86,10 +88,19 @@ export class CreateDiagnosticImagingRequestComponent implements OnInit {
       const res = await this.diagnosticImagingService.createDiagnosticImagingRequest(diagnositcImagingRequest);
       if(res){
         //laboratoryRequestData.labId = Number(res);
-        console.log("lab: "+res); 
+          console.log("lab: " + res);
+          this._snackBar.open('Diagnostic imaging request created successfully.', 'Ok', {
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+              duration: 5 * 1000,
+          });
         this.dialogRef.close(res);
       }else{  
-
+          this._snackBar.open('Error creating request. Please try again or contact a system administrator.', 'Ok', {
+              horizontalPosition: 'center',
+              verticalPosition: 'top',
+              duration: 5 * 1000,
+          });
       }      
     }
   }

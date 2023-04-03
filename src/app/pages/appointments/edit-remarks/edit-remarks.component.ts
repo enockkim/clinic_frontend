@@ -25,8 +25,8 @@ export class EditRemarksComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.data.appointmentData.appointmentId, this.data.appointmentData.patientName);
-    this.form = this.fb.group({
-      remarks: ['', Validators.required]
+      this.form = this.fb.group({
+          remarks: [this.data.appointmentData.remarks, Validators.required]
     });
   }
 

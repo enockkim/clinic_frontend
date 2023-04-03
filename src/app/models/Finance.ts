@@ -36,4 +36,11 @@ export interface AccountsReceivable{
   transactionRefrence: string; 
 }
 
-
+export interface BillData {
+    billNo?: number;
+    appointmentId: number;
+    patientId: number;
+    patientIdNumber: number;
+    patientName: string;
+    status: number;
+}
