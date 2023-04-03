@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { Appointment, AppointmentData } from 'app/models/Appointment';
@@ -11,6 +11,8 @@ import { FacilityService } from '../../../services/facility.service';
 import { TriageService } from 'app/services/facilities/triage.service';
 import { OperationService } from 'app/services/facilities/operation.service';
 import { DiagnositcImagingService } from 'app/services/facilities/diagnostic-imaging.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-requests',
@@ -25,6 +27,8 @@ import { DiagnositcImagingService } from 'app/services/facilities/diagnostic-ima
   ],
 })
 export class RequestsComponent implements OnInit {
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
 
   constructor(    
     private AppointmentService: AppointmentService,
@@ -164,6 +168,9 @@ export class RequestsComponent implements OnInit {
         break;
     }
 
+
+      this.Data.sort((a, b) => (a.appointmentId > b.appointmentId ? -1 : 1));
+
     this.DataSource = new MatTableDataSource(this.Data);    
     this.facilitiesResult = await this.FacilityService.getFacilities();
   }
@@ -256,22 +263,23 @@ export class RequestsComponent implements OnInit {
 
     switch(this.facilityForm){
       case 'lab':
-        this.DetailData = await this.LaboratoryService.getLaboratoryRequestsByAppointmentId(appointmentData.appointmentId);
+            this.DetailData = await this.LaboratoryService.getLaboratoryRequestsByAppointmentId(appointmentData.appointmentId);
         this.DetailDataSource = new MatTableDataSource(this.DetailData.filter(labDetail => labDetail.status == 0));
         this.DetailsColumnsToDisplay = ['labId', 'facility', 'labResults', 'labTechRemarks', 'actions'];
         break;
       case 'diagnosticImaging':
-        this.DetailData = await this.diagnositcImagingService.getDiagnosticImagingRequestsByAppointmentId(appointmentData.appointmentId);
+            this.DetailData = await this.diagnositcImagingService.getDiagnosticImagingRequestsByAppointmentId(appointmentData.appointmentId);
+            console.log("diagnosticImaging loaded");
         this.DetailDataSource = new MatTableDataSource(this.DetailData.filter(diagnosticImaging => diagnosticImaging.status == 0));
         this.DetailsColumnsToDisplay = ['imagingRequestId', 'imagingSubType', 'result', 'doctorRemarks', 'technicianRemarks', 'actions'];
         break;
       case 'operations':
-        this.DetailData = await this.operationService.getOperationRequestsByAppointmentId(appointmentData.appointmentId);
+            this.DetailData = await this.operationService.getOperationRequestsByAppointmentId(appointmentData.appointmentId);
         this.DetailDataSource = new MatTableDataSource(this.DetailData.filter(operation => operation.status == 0));
         this.DetailsColumnsToDisplay = ['operationRequestId', 'operationSubType', 'doctorRemarks', 'operatorRemarks', 'actions'];
         break;
       case 'triage':
-        this.DetailData = await this.triageService.getVitalsByAppointmentId(appointmentData.appointmentId);
+            this.DetailData = await this.triageService.getVitalsByAppointmentId(appointmentData.appointmentId);
         this.DetailDataSource = new MatTableDataSource(this.DetailData.filter(triage => triage.status == 0));
             this.DetailsColumnsToDisplay = ['vRecordId', 'temperature', 'pressure', 'pulseRate', 'respirationRate', 'weight', 'height', 'actions'];
         break;
@@ -287,5 +295,18 @@ export class RequestsComponent implements OnInit {
     this.FormData = labDetail;
     this.billTotal = 100;
   }
+    ngAfterViewInit() {
+        this.DataSource.paginator = this.paginator;
+        this.DataSource.sort = this.sort;
+    }
+
+    applyFilter(event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.DataSource.filter = filterValue.trim().toLowerCase();
+
+        if (this.DataSource.paginator) {
+            this.DataSource.paginator.firstPage();
+        }
+    }
 
 }

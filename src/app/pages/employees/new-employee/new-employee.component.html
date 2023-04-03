@@ -18,12 +18,12 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Surname" formControlName="surname" type="text">
+                                        <input matInput placeholder="Surname" formControlName="surname" type="text"  [ngModel]="surname" (ngModelChange)="surname = $event.toUpperCase()">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Other Names" formControlName="otherName" type="text">
+                                        <input matInput placeholder="Other Names" formControlName="otherName" type="text" [ngModel]="otherName" (ngModelChange)="otherName = $event.toUpperCase()">
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -44,10 +44,10 @@
                                 <div class="col-md-3">
                                     <mat-form-field appearance="fill">
                                         <mat-label>Date of Birth</mat-label>
-                                        <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+                                        <input matInput [matDatepicker]="dateOfBirth" formControlName="dateOfBirth">
                                         <mat-hint>MM/DD/YYYY</mat-hint>
-                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                        <mat-datepicker #picker></mat-datepicker>
+                                        <mat-datepicker-toggle matSuffix [for]="dateOfBirth"></mat-datepicker-toggle>
+                                        <mat-datepicker #dateOfBirth></mat-datepicker>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Name" formControlName="nokName" type="text">
+                                        <input matInput placeholder="Name" formControlName="nokName" type="text"  [ngModel]="nokName" (ngModelChange)="nokName = $event.toUpperCase()">
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
@@ -114,10 +114,10 @@
                                 <div class="col-md-3">
                                     <mat-form-field appearance="fill">
                                         <mat-label>Starting Date</mat-label>
-                                        <input matInput [matDatepicker]="picker" formControlName="startDate">
+                                        <input matInput [matDatepicker]="startDate" formControlName="startDate">
                                         <mat-hint>MM/DD/YYYY</mat-hint>
-                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                        <mat-datepicker #picker></mat-datepicker>
+                                        <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                                        <mat-datepicker #startDate></mat-datepicker>
                                     </mat-form-field>
                                 </div>
                             </div>

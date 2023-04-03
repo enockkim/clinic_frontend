@@ -1,65 +1,75 @@
-<br/>
+<div class="col-md-4">
+    <mat-form-field>
+        <mat-label>Search</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Search" #input>
+    </mat-form-field>
+</div>
+<br />
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
     <!-- Patient ID Column -->
-                  <!-- EID Column -->
-                  <ng-container matColumnDef="number">
-                    <th mat-header-cell *matHeaderCellDef>Appointment Number</th>
-                    <td mat-cell *matCellDef="let element">{{element.appointmentId}}</td>
-                  </ng-container>   
-                  
-                  <!-- National ID Column -->
-                  <ng-container matColumnDef="patientNumber">
-                    <th mat-header-cell *matHeaderCellDef>Patient Number</th>
-                    <td mat-cell *matCellDef="let element">{{element.patientId}}</td>
-                  </ng-container>
-                
-                                  
-                  <!-- National ID Column -->
-                  <ng-container matColumnDef="patientName">
-                    <th mat-header-cell *matHeaderCellDef>Patient Name</th>
-                    <td mat-cell *matCellDef="let element">{{element.patientName}}</td>
-                  </ng-container>
-                
-                  <!-- Name Column -->
-                  <ng-container matColumnDef="doctor">
-                    <th mat-header-cell *matHeaderCellDef>Doctor</th>
-                    <td mat-cell *matCellDef="let element">{{element.employeeName}}</td>
-                  </ng-container>
-                
-                  <!-- Designation Column -->
-                  <ng-container matColumnDef="type">
-                    <th mat-header-cell *matHeaderCellDef>Appointment Type</th>
-                    <td mat-cell *matCellDef="let element">{{element.appointmentTypeName}}</td>
-                  </ng-container>
+    <!-- EID Column -->
+    <ng-container matColumnDef="number">
+        <th mat-header-cell *matHeaderCellDef>Appointment Number</th>
+        <td mat-cell *matCellDef="let element">{{element.appointmentId}}</td>
+    </ng-container>
 
-                  <!-- Employment Type Column -->
-                  <ng-container matColumnDef="date">
-                    <th mat-header-cell *matHeaderCellDef>Date of Appointment</th>
-                    <td mat-cell *matCellDef="let element">{{element.dateOfAppointment}}</td>
-                  </ng-container> 
+    <!-- National ID Column -->
+    <ng-container matColumnDef="patientNumber">
+        <th mat-header-cell *matHeaderCellDef>Patient Number</th>
+        <td mat-cell *matCellDef="let element">{{element.patientId}}</td>
+    </ng-container>
 
-                  <!-- Employment Type Column -->
-                  <ng-container matColumnDef="remarks">
-                    <th mat-header-cell *matHeaderCellDef>Remarks</th>
-                    <td mat-cell *matCellDef="let element">{{element.remarks}}</td>
-                  </ng-container>    
+
+    <!-- National ID Column -->
+    <ng-container matColumnDef="patientName">
+        <th mat-header-cell *matHeaderCellDef>Patient Name</th>
+        <td mat-cell *matCellDef="let element">{{element.patientName}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="doctor">
+        <th mat-header-cell *matHeaderCellDef>Doctor</th>
+        <td mat-cell *matCellDef="let element">{{element.employeeName}}</td>
+    </ng-container>
+
+    <!-- Designation Column -->
+    <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef>Appointment Type</th>
+        <td mat-cell *matCellDef="let element">{{element.appointmentTypeName}}</td>
+    </ng-container>
+
+    <!-- Employment Type Column -->
+    <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef>Date of Appointment</th>
+        <td mat-cell *matCellDef="let element">{{element.dateOfAppointment}}</td>
+    </ng-container>
+
+    <!-- Employment Type Column -->
+    <ng-container matColumnDef="remarks">
+        <th mat-header-cell *matHeaderCellDef>Remarks</th>
+        <td mat-cell *matCellDef="let element">{{element.remarks}}</td>
+    </ng-container>
 
     <!-- Actions Column -->
     <ng-container matColumnDef="actions">
-      <th mat-header-cell *matHeaderCellDef>Actions</th>
-      <td mat-cell *matCellDef="let element">
-        <!-- <i class="material-icons">edit</i>&nbsp; -->
-        <button mat-raised-button style="background-color: orange; color: white;" (click)="openDialog('0ms', '0ms', 1)" [class.demo-row-is-clicked]="clickedRows.has(row)">
-            <i class="material-icons">edit</i>
-        </button>
-        <!-- <i class="material-icons">transfer_within_a_station</i>                         -->
-        <button mat-raised-button style="background-color: green; color: white;" (click)="openTransferDialog('0ms', '0ms', 2, element)" [class.demo-row-is-clicked]="clickedRows.has(row)">
-            <i class="material-icons">transfer_within_a_station</i>
-        </button>
-      </td>
-    </ng-container>  
-                      
+        <th mat-header-cell *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let element">
+            <!-- <i class="material-icons">edit</i>&nbsp; -->
+            <button mat-raised-button style="background-color: orange; color: white;" (click)="openDialog('0ms', '0ms', 1)" [class.demo-row-is-clicked]="clickedRows.has(row)">
+                <i class="material-icons">edit</i>
+            </button>
+            <!-- <i class="material-icons">transfer_within_a_station</i>                         -->
+            <button mat-raised-button style="background-color: green; color: white;" (click)="openTransferDialog('0ms', '0ms', 2, element)" [class.demo-row-is-clicked]="clickedRows.has(row)">
+                <i class="material-icons">transfer_within_a_station</i>
+            </button>
+        </td>
+    </ng-container>
+
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  </table>                       
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+</table>
+<mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>

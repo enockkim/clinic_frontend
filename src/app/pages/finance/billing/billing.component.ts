@@ -41,7 +41,8 @@ export class BillingComponent implements OnInit {
   // billTotal: number = 0;
 
   async ngOnInit() {
-    this.billData = await this.FinanceService.getBills()  
+      this.billData = await this.FinanceService.getBills()  
+      this.billData.sort((a, b) => (a.billNo > b.billNo ? -1 : 1));
     this.billDataSource = new MatTableDataSource(this.billData.filter(bill => bill.status == 0));
     // this.billDataSource.sort = this.sort;
   }

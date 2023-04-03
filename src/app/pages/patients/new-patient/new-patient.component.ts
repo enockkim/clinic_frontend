@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { GenderService } from '../../../services/others/gender.service';
 import { RelationshipService } from '../../../services/others/relationship.service';
@@ -37,6 +37,9 @@ export class NewPatientComponent implements OnInit {
     wards: Wards[];
     wardsFiltered: Wards[];
 
+    otherName = "";
+    surname = "";
+    nokName = "";
     countyIndex: number;
     subcountyIndex: number;
 

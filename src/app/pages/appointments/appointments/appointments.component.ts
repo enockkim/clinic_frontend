@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {NewAppointmentComponent} from '../new-appointment/new-appointment.component';
 import {TransferAppointmentComponent} from '../transfer-appointment/transfer-appointment.component';
@@ -10,6 +10,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Appointment, AppointmentData } from 'app/models/Appointment';
 import { PaymentMethod } from 'app/models/PaymentMethod';
 import { Facility } from 'app/models/Facility';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 
 @Component({
@@ -19,6 +21,9 @@ import { Facility } from 'app/models/Facility';
 })
 
 export class AppointmentsComponent implements OnInit {
+
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
 
   constructor(
     public dialog: MatDialog, 
@@ -69,6 +74,20 @@ export class AppointmentsComponent implements OnInit {
     this.paymentMethodResult = await this.PaymentMethodService.getPaymentMethods();
     this.facilitiesResult = await this.FacilityService.getFacilities();
   }
+
+    ngAfterViewInit() {
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+    }
+
+    applyFilter(event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+
+        if (this.dataSource.paginator) {
+            this.dataSource.paginator.firstPage();
+        }
+    }
 }
 
 

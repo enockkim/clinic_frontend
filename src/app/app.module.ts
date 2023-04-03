@@ -59,6 +59,7 @@ import { AddStockComponent } from './pages/inventory/medication/add-stock/add-st
 import { ViewPrescriptionReportComponent } from './reports/pharmacy/view-prescription-report/view-prescription-report.component';
 import { ClearAppointmentComponent } from './pages/appointments/clear-appointment/clear-appointment.component';
 import { MedicationListComponent } from './reports/pharmacy/medication-list/medication-list.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   imports: [
@@ -81,7 +82,8 @@ import { MedicationListComponent } from './reports/pharmacy/medication-list/medi
     MatSortModule,
     MatButtonModule,
         NgxExtendedPdfViewerModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        MatPaginatorModule
   ],
   declarations: [
     AppComponent,

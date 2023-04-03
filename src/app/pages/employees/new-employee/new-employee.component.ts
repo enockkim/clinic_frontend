@@ -31,6 +31,10 @@ export class NewEmployeeComponent implements OnInit {
     relationships: Relationship[] = [];
     form: FormGroup;
 
+    otherName = "";
+    surname = "";
+    nokName = "";
+
     async ngOnInit() {
 
         this.form = this.fb.group({

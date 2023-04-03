@@ -18,6 +18,7 @@ import { CreateDiagnosticImagingRequestComponent } from '../../pages/facilities/
 import { CreateOperationRequestComponent } from '../../pages/facilities/operations/create-operation-request/create-operation-request.component';
 import { CreatePrescriptionItemComponent } from '../../pages/facilities/pharmacy/create-prescription-item/create-prescription-item.component';
 import { ServicesComponent } from '../services/services.component';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 @Component({
@@ -38,10 +39,10 @@ export class AppointmentsDataComponent implements OnInit {
 
   @Input() appointmentType: number;
   @Input() appointmentStatus: number;
-  @ViewChild('outerSort', { static: true }) sort: MatSort;
-  @ViewChildren('innerSort') innerSort: QueryList<MatSort>;
-  @ViewChildren('innerTables') innerTables: QueryList<MatTable<Address>>;  
-  @ViewChild(ServicesComponent) servicesComponent: ServicesComponent;
+  //@ViewChild('outerSort', { static: true }) sort: MatSort;
+  //@ViewChildren('innerSort') innerSort: QueryList<MatSort>;
+  //@ViewChildren('innerTables') innerTables: QueryList<MatTable<Address>>;  
+  //@ViewChild(ServicesComponent) servicesComponent: ServicesComponent;
 
   dataSource: MatTableDataSource<AppointmentData>;
   usersData: AppointmentData[] = [];
@@ -49,7 +50,11 @@ export class AppointmentsDataComponent implements OnInit {
   //innerDisplayedColumns = ['street', 'zipCode', 'city'];
   expandedElement: AppointmentData | null;
   appointmentId: number;
- 
+
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    @ViewChild(MatSort) sort: MatSort;
+
+
   constructor(
     public dialog: MatDialog, 
     private cd: ChangeDetectorRef,    
@@ -62,10 +67,24 @@ export class AppointmentsDataComponent implements OnInit {
     // USERS.forEach(user => {
     //     this.usersData = [...this.usersData, {...user, addresses: new MatTableDataSource(user.addresses)}];
     // });
-    this.appointments = await this.AppointmentService.getAppointments(this.appointmentType, this.appointmentStatus)  
+      this.appointments = await this.AppointmentService.getAppointments(this.appointmentType, this.appointmentStatus);
+      this.appointments.sort((a, b) => (a.appointmentId > b.appointmentId ? -1 : 1));
     this.dataSource = new MatTableDataSource(this.appointments);
     this.dataSource.sort = this.sort;
   }
+    ngAfterViewInit() {
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+    }
+
+    applyFilter(event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.dataSource.filter = filterValue.trim().toLowerCase();
+
+        if (this.dataSource.paginator) {
+            this.dataSource.paginator.firstPage();
+        }
+    }
 
   toggleRow(element: AppointmentData) {
 
@@ -77,9 +96,9 @@ export class AppointmentsDataComponent implements OnInit {
     // this.innerTables.forEach((table, index) => (table.dataSource as MatTableDataSource<Address>).sort = this.innerSort.toArray()[index]);
   }
 
-  applyFilter(filterValue: string) {
-    this.innerTables.forEach((table, index) => (table.dataSource as MatTableDataSource<Address>).filter = filterValue.trim().toLowerCase());
-  }
+  //applyFilter(filterValue: string) {
+  //  this.innerTables.forEach((table, index) => (table.dataSource as MatTableDataSource<Address>).filter = filterValue.trim().toLowerCase());
+  //}
 
   
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string, appointmentData: AppointmentData): void {
