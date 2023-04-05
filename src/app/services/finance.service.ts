@@ -23,7 +23,7 @@ const httpOptions = {
 
 export class FinanceService {
 
-  private apiUrl = 'https://localhost:44320/Finance';
+    private apiUrl = 'https://www.prema.lol/Finance';
 
   constructor(private http: HttpClient) { }
 

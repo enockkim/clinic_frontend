@@ -36,12 +36,24 @@ export class AppointmentsComponent implements OnInit {
   paymentMethodResult: PaymentMethod[];
   facilitiesResult: Facility[];
 
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string, action_type: number): void {
-    this.dialog.open(NewAppointmentComponent, {
-      data: { action_type: action_type },
+    openDialog(enterAnimationDuration: string, exitAnimationDuration: string, action_type: number, element: AppointmentData): void {
+    const dial = this.dialog.open(NewAppointmentComponent, {
+        data: { action_type: action_type, appointmentData: element },
       width: "50%",
       height: "",
     });
+
+        dial.afterClosed()
+            .subscribe(updatedAppointment => {
+                console.log("appointmentData: " + updatedAppointment);
+                this.dataSource.data.forEach(function (appointment) {
+                    if (appointment.appointmentId == updatedAppointment.appointmentId) {
+                        appointment.dateOfAppointment = updatedAppointment.dateOfAppointment,
+                        appointment.remarks = updatedAppointment.remarks,
+                        appointment.appointmentType = updatedAppointment.appointmentType
+                    }
+                })
+            })
   }
 
   

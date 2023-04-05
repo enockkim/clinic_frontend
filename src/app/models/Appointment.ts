@@ -1,5 +1,5 @@
 export interface Appointment {
-  appointmentId: number,
+  appointmentId?: number,
   patientId: number,
   employeeId: number,
   dateOfAppointment: Date,
@@ -33,4 +33,10 @@ export interface AppointmentData{
   patientTypeName: string,
   previousFacility: number,
   previousFacilityName: string
+}
+
+export interface AppointmentTypes {
+    typeId: number,
+    type: string,
+    patientType: number
 }

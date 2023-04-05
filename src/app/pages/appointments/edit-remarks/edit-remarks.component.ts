@@ -33,8 +33,21 @@ export class EditRemarksComponent implements OnInit {
   async onSubmit() {
     if (this.form.valid) {
       const formData = this.form.value;
-      this.data.appointmentData.remarks = formData.remarks;
-      const res = await this.AppointmentService.editAppointment(this.data.appointmentData);
+        //this.data.appointmentData.remarks = formData.remarks;
+        let appointmentData: Appointment = {
+            patientId: this.data.appointmentData.patientId,
+            employeeId: this.data.appointmentData.employeeId,
+            dateOfAppointment: this.data.appointmentData.dateOfAppointment,
+            remarks: formData.remarks,
+            appointmentStatus: this.data.appointmentData.appointmentStatus,
+            paymentMethod: this.data.appointmentData.paymentMethod,
+            appointmentType: this.data.appointmentData.appointmentType,
+            dateOfCreation: this.data.appointmentData.dateOfCreation,
+            createdBy: this.data.appointmentData.createdBy,
+            patientType: this.data.appointmentData.patientType,
+            previousFacility: this.data.appointmentData.previousFacility
+        }
+      const res = await this.AppointmentService.editAppointment(appointmentData);
       console.log("AppointmentId: "+this.data.appointmentData.appointmentId);
       if(res){
         this.dialogRef.close(this.data.appointmentData);

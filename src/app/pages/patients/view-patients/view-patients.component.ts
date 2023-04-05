@@ -6,6 +6,8 @@ import { Patient, PatientData } from '../../../models/Patient';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { AppointmentData } from '../../../models/Appointment';
+import { NewAppointmentComponent } from '../../appointments/new-appointment/new-appointment.component';
 
 // export interface PeriodicElement {
 //   name: string;
@@ -32,7 +34,8 @@ export class ViewPatientsComponent implements OnInit {
 
   constructor(public dialog: MatDialog, private ProjectsService: ProjectsService) {}
 
-    openDialog(enterAnimationDuration: string, exitAnimationDuration: string, patientData: Patient): void {
+    editPatient(enterAnimationDuration: string, exitAnimationDuration: string, patientData: Patient): void {
+        console.log(patientData);
         console.log("view",patientData.patientId);
       this.dialog.open(EditPatientModalComponent, {
           data: { patientData: patientData },
@@ -42,7 +45,7 @@ export class ViewPatientsComponent implements OnInit {
   }
 
   
-  displayedColumns: string[] = ['patientId', 'nationalIdNumber', 'otherName', 'gender', 'county'];
+    displayedColumns: string[] = ['patientId', 'nationalIdNumber', 'otherName', 'gender', 'county', 'actions'];
   clickedRows = new Set<Patient>();
   
   dataSource = new MatTableDataSource<Patient>();
@@ -70,6 +73,15 @@ export class ViewPatientsComponent implements OnInit {
         if (this.dataSource.paginator) {
             this.dataSource.paginator.firstPage();
         }
+    }
+
+    createAppointment(enterAnimationDuration: string, exitAnimationDuration: string, action_type: number, element: Patient): void {
+        //console.log(element);
+        this.dialog.open(NewAppointmentComponent, {
+            data: { action_type: action_type, patientData: element },
+            width: "50%",
+            height: "",
+        });
     }
 
 }
