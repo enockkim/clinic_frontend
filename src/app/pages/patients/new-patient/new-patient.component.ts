@@ -9,6 +9,7 @@ import { Relationship } from '../../../models/Relationship';
 import { User } from '../../../models/User';
 import { County, Subcounty, Wards } from '../../../models/Location';
 import { LocationService } from '../../../services/others/location.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 //import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 //import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
@@ -53,7 +54,8 @@ export class NewPatientComponent implements OnInit {
     private ProjectsService: ProjectsService, 
     private GenderService: GenderService, 
       private RelationshipService: RelationshipService,
-    private LocationService: LocationService
+      private LocationService: LocationService,
+      private _snackBar: MatSnackBar,
     ) { }
 
     //date = new FormControl(moment());
@@ -89,7 +91,8 @@ export class NewPatientComponent implements OnInit {
       dob: ['', Validators.required],
       nokName: ['', Validators.required],
       nokContact: ['', Validators.required],
-      nokRelationship: ['', Validators.required],
+        nokRelationship: ['', Validators.required],
+        nokNationalIdNumber: ['', Validators.required],
       county: ['', Validators.required],
       subcounty: ['', Validators.required],
         ward: ['', Validators.required],
@@ -130,7 +133,8 @@ export class NewPatientComponent implements OnInit {
         dob: formData.dob,
         nokName: formData.nokName,
         nokContact: Number(formData.nokContact),
-        nokRelationship: formData.nokRelationship,
+          nokRelationship: formData.nokRelationship,
+          nokNationalIdNumber: formData.nokNationalIdNumber,
         nationalIdNumber: formData.nationalIdNumber,
         county: Number(formData.county),
         subcounty: Number(formData.subcounty),
@@ -141,8 +145,23 @@ export class NewPatientComponent implements OnInit {
       this.userData.Id = "3342-2342-324";
       this.userData.UserName = "username";
       this.patientData.patientData = patient;
-      this.patientData.userData = this.userData;
-      await this.ProjectsService.addPatient(this.patientData);
+        this.patientData.userData = this.userData;
+        const res = await this.ProjectsService.addPatient(this.patientData);
+
+        if (res != null) {
+            this._snackBar.open('Patient added sucessfully.', 'Ok', {
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+                duration: 5 * 1000,
+            });
+            this.form.reset();
+        } else {
+            this._snackBar.open('Error adding patient.', 'Ok', {
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+                duration: 5 * 1000,
+            });
+        }
         // .subscribe(res => {
         //   console.log('Data has been sent successfully');
         // }, error => {

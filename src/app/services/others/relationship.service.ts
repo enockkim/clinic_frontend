@@ -24,7 +24,7 @@ const httpOptions = {
 })
 export class RelationshipService {
 
-  private apiUrl = 'https://localhost:44320/Relationship';
+  private apiUrl = 'https://www.prema.lol/Relationship';
 
   constructor(private http: HttpClient) { }
 

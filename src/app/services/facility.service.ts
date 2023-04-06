@@ -24,7 +24,7 @@ const httpOptions = {
 })
 export class FacilityService {
 
-  private apiUrl = 'https://localhost:44320/Facility';
+  private apiUrl = 'https://www.prema.lol/Facility';
 
   constructor(private http: HttpClient) { }
 

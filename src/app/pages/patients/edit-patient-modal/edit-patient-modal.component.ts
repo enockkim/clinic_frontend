@@ -10,6 +10,7 @@ import { User } from '../../../models/User';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { County, Subcounty, Wards } from '../../../models/Location';
 import { LocationService } from '../../../services/others/location.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-patient-modal',
@@ -27,11 +28,11 @@ export class EditPatientModalComponent implements OnInit {
         @Inject(MAT_DIALOG_DATA) public data: { patientData: Patient },
         dialog: MatDialog,
         public dialogRef: MatDialogRef<EditPatientModalComponent>,
-        private LocationService: LocationService
+        private LocationService: LocationService,
+        private _snackBar: MatSnackBar,
     ) { }
 
 
-    form: FormGroup;
     patientData = {} as PatientData;
     userData = {} as User;
     genders: Gender[];
@@ -41,21 +42,18 @@ export class EditPatientModalComponent implements OnInit {
     subcountiesFiltered: Subcounty[];
     wards: Wards[];
     wardsFiltered: Wards[];
-    countyIndex: number;
-    subcountyIndex: number;
+    countyIndex: number = this.data.patientData.county;
+    subcountyIndex: number = this.data.patientData.subcounty;
+    form: FormGroup;
 
     subcounty(countyId: number) {
-        console.log(countyId);
-        this.subcountiesFiltered = this.subcounties.filter(s => s.countyId == countyId)
+        this.subcountiesFiltered = this.subcounties.filter(s => s.countyId == countyId);
     }
     ward(subcountyId: number) {
-        console.log(subcountyId);
-        this.wardsFiltered = this.wards.filter(s => s.subcountyId == subcountyId)
+        this.wardsFiltered = this.wards.filter(s => s.subcountyId == subcountyId);
     }
 
     async ngOnInit() {
-
-        console.log("view", this.data.patientData.patientId);
 
         this.form = this.fb.group({
             patientId: [this.data.patientData.patientId, Validators.required],
@@ -68,18 +66,23 @@ export class EditPatientModalComponent implements OnInit {
             dob: [this.data.patientData.dob, Validators.required],
             nokName: [this.data.patientData.nokName, Validators.required],
             nokContact: [this.data.patientData.nokContact, Validators.required],
+            nokNationalIdNumber: [this.data.patientData.nokNationalIdNumber, Validators.required],
             nokRelationship: [this.data.patientData.nokRelationship, Validators.required],
-            county: [this.data.patientData.county, Validators.required],
-            subcounty: [this.data.patientData.subcounty, Validators.required],
-            ward: [this.data.patientData.ward, Validators.required]
-        });
+            county: ['', Validators.required],
+            subcounty: ['', Validators.required],
+            ward: ['', Validators.required]
+        });    
 
+            this.genders = await this.GenderService.getGenders();
+            this.relationships = await this.RelationshipService.getRelationships();
+            this.counties = await this.LocationService.getCounties();
+            this.subcounties = await this.LocationService.getSubCounties();
+            this.wards = await this.LocationService.getWards();
 
-        this.genders = await this.GenderService.getGenders();
-        this.relationships = await this.RelationshipService.getRelationships();
-        this.counties = await this.LocationService.getCounties();
-        this.subcounties = await this.LocationService.getSubCounties();
-        this.wards = await this.LocationService.getWards();
+        this.form.controls['county'].setValue(this.data.patientData.county);
+        this.form.controls['subcounty'].setValue(this.data.patientData.subcounty);
+        this.form.controls['ward'].setValue(this.data.patientData.ward);
+
     }
 
     logData() {
@@ -111,7 +114,22 @@ export class EditPatientModalComponent implements OnInit {
             this.userData.UserName = "username";
             this.patientData.patientData = patient;
             this.patientData.userData = this.userData;
-            await this.ProjectsService.updatePatient(this.patientData);
+
+            
+
+            if (await this.ProjectsService.updatePatient(this.patientData)) {
+                this._snackBar.open('Patient updated sucessfully.', 'Ok', {
+                    horizontalPosition: 'center',
+                    verticalPosition: 'top',
+                    duration: 5 * 1000,
+                });
+            } else {
+                this._snackBar.open('Error updating patient.', 'Ok', {
+                    horizontalPosition: 'center',
+                    verticalPosition: 'top',
+                    duration: 5 * 1000,
+                });
+            }
             // .subscribe(res => {
             //   console.log('Data has been sent successfully');
             // }, error => {

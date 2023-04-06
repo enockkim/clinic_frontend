@@ -10,6 +10,7 @@ export interface Patient {
     nokName: string;
     nokContact: number;
     nokRelationship: number;
+    nokNationalIdNumber?: string;
     nationalIdNumber: string;
     county: number;
     subcounty: number;

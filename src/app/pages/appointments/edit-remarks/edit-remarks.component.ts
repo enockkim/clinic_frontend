@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Appointment, AppointmentData } from 'app/models/Appointment';
 import { AppointmentService } from '../../../services/appointment.service';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef  } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-remarks',
@@ -16,7 +17,8 @@ export class EditRemarksComponent implements OnInit {
     {
       appointmentData: AppointmentData
     }, 
-    private fb: FormBuilder, 
+      private fb: FormBuilder,
+      private _snackBar: MatSnackBar,
     private AppointmentService: AppointmentService, 
     dialog: MatDialog,
     public dialogRef: MatDialogRef<EditRemarksComponent>) { }
@@ -49,11 +51,23 @@ export class EditRemarksComponent implements OnInit {
         }
       const res = await this.AppointmentService.editAppointment(appointmentData);
       console.log("AppointmentId: "+this.data.appointmentData.appointmentId);
-      if(res){
-        this.dialogRef.close(this.data.appointmentData);
-      }else{  
 
-      }
+
+
+        if (res) {
+            this._snackBar.open('Remarks updated sucessfully.', 'Ok', {
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+                duration: 5 * 1000,
+            });
+            this.dialogRef.close(this.data.appointmentData);
+        } else {
+            this._snackBar.open('Error updating remarks.', 'Ok', {
+                horizontalPosition: 'center',
+                verticalPosition: 'top',
+                duration: 5 * 1000,
+            });
+        }
       
     }
   }

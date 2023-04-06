@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { InvetoryCategory } from '../../../../models/Pharmacy';
 import { PharmacyService } from '../../../../services/facilities/pharmacy.service';
 
@@ -14,7 +15,8 @@ export class AddCategoryComponent implements OnInit {
     constructor(
         private fb: FormBuilder,
         public dialogRef: MatDialogRef<AddCategoryComponent>,
-        private pharmacyService: PharmacyService
+        private pharmacyService: PharmacyService,
+        private _snackBar: MatSnackBar,
     ) { }
 
     form: FormGroup;
@@ -41,10 +43,21 @@ export class AddCategoryComponent implements OnInit {
 
             const addedCategory = await this.pharmacyService.addInventoryCategory(newCatgory);
 
+ 
+
             if (addedCategory) {
+                this._snackBar.open('New category added sucessfully.', 'Ok', {
+                    horizontalPosition: 'center',
+                    verticalPosition: 'top',
+                    duration: 5 * 1000,
+                });
                 this.dialogRef.close(addedCategory);
             } else {
-                //TODO show error 
+                this._snackBar.open('Error adding category.', 'Ok', {
+                    horizontalPosition: 'center',
+                    verticalPosition: 'top',
+                    duration: 5 * 1000,
+                });
             }
 
         }

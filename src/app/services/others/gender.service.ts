@@ -24,7 +24,7 @@ const httpOptions = {
 })
 export class GenderService {
 
-  private apiUrl = 'https://localhost:44320/Gender';
+  private apiUrl = 'https://www.prema.lol/Gender';
 
   constructor(private http: HttpClient) { }
 

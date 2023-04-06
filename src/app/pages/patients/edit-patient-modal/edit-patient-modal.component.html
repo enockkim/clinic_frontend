@@ -14,8 +14,8 @@
                         <form [formGroup]="form" (ngSubmit)="onSubmit()">
                             <div class="row">
                                 <div class="col-md-2">
-                                    <mat-form-field class="example-full-width">
-                                        <input matInput placeholder="Patient ID" formControlName="patientId"    >
+                                    <mat-form-field class="example-full-width" appearance="fill" >
+                                        <input matInput placeholder="Patient ID" formControlName="patientId" readonly>
                                     </mat-form-field>
                                 </div>
                             </div>
@@ -39,7 +39,7 @@
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-3">
-                                    <mat-form-field appearance="fill" class="example-full-width">
+                                    <mat-form-field  class="example-full-width">
                                         <mat-label>Gender</mat-label>
                                         <mat-select formControlName="gender">
                                             <mat-option *ngFor="let gender of this.genders" [value]="gender.id">{{gender.genderName}}</mat-option>
@@ -47,7 +47,7 @@
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-3">
-                                    <mat-form-field appearance="fill">
+                                    <mat-form-field >
                                         <mat-label>Date of Birth</mat-label>
                                         <input matInput [matDatepicker]="picker" formControlName="dob">
                                         <mat-hint>MM/DD/YYYY</mat-hint>
@@ -77,7 +77,7 @@
                             <h3>Place of Residence</h3>
                             <div class="row">
                                 <div class="col-md-4">
-                                    <mat-form-field appearance="fill" class="example-full-width">
+                                    <mat-form-field class="example-full-width">
                                         <mat-label>County</mat-label>
                                         <mat-select formControlName="county" [(ngModel)]="countyIndex" (ngModelChange)="subcounty(countyIndex)">
                                             <mat-option *ngFor="let county of this.counties" [value]="county.id">{{county.county_name}}</mat-option>
@@ -85,7 +85,7 @@
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
-                                    <mat-form-field appearance="fill" class="example-full-width">
+                                    <mat-form-field class="example-full-width">
                                         <mat-label>Sub-County</mat-label>
                                         <mat-select formControlName="subcounty" [(ngModel)]="subcountyIndex" (ngModelChange)="ward(subcountyIndex)">
                                             <mat-option *ngFor="let subcounty of this.subcountiesFiltered" [value]="subcounty.subcountyId">{{subcounty.subcountyName}}</mat-option>
@@ -93,7 +93,7 @@
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
-                                    <mat-form-field appearance="fill" class="example-full-width">
+                                    <mat-form-field class="example-full-width">
                                         <mat-label>Constituency</mat-label>
                                         <mat-select formControlName="ward">
                                             <mat-option *ngFor="let ward of this.wardsFiltered" [value]="ward.id">{{ward.ward}}</mat-option>
@@ -120,6 +120,11 @@
                                     <mat-form-field class="example-full-width">
                                         <input matInput placeholder="Name" formControlName="nokName" type="text">
                                     </mat-form-field>
+                                </div>                                
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="National ID" formControlName="nokNationalIdNumber" type="text">
+                                    </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
                                     <mat-form-field class="example-full-width">
@@ -127,7 +132,7 @@
                                     </mat-form-field>
                                 </div>
                                 <div class="col-md-4">
-                                    <mat-form-field appearance="fill" class="example-full-width">
+                                    <mat-form-field  class="example-full-width">
                                         <mat-label>Relationship</mat-label>
                                         <mat-select formControlName="nokRelationship">
                                             <mat-option *ngFor="let relationship of this.relationships" [value]="relationship.relationshipId">{{relationship.relationshipName}}</mat-option>

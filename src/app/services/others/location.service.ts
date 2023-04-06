@@ -7,7 +7,7 @@ import { County, Subcounty, Wards } from '../../models/Location';
 })
 export class LocationService {
 
-    private apiUrl = 'https://localhost:44320/Location';
+    private apiUrl = 'https://www.prema.lol/Location';
 
     constructor(private http: HttpClient) { }
 

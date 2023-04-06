@@ -24,7 +24,7 @@ const httpOptions = {
 })
 export class LaboratoryService {
 
-  private apiUrl = 'https://localhost:44320/Laboratory';
+  private apiUrl = 'https://www.prema.lol/Laboratory';
 
   constructor(private http: HttpClient) { }
 

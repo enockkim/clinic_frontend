@@ -24,7 +24,7 @@ const httpOptions = {
 })
 export class DiagnositcImagingService {
 
-  private apiUrl = 'https://localhost:44320/DiagnosticImaging';
+  private apiUrl = 'https://www.prema.lol/DiagnosticImaging';
 
   constructor(private http: HttpClient) { }
 

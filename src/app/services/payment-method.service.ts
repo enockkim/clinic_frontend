@@ -24,7 +24,7 @@ const httpOptions = {
 })
 export class PaymentMethodService {
 
-  private apiUrl = 'https://localhost:44320/PaymentMethod';
+  private apiUrl = 'https://www.prema.lol/PaymentMethod';
 
   constructor(private http: HttpClient) { }
 

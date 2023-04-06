@@ -3,13 +3,10 @@
     "",
     "\\src",
     "\\src\\app",
-    "\\src\\app\\layouts",
-    "\\src\\app\\layouts\\admin-layout",
     "\\src\\app\\pages",
-    "\\src\\app\\pages\\appointments",
-    "\\src\\app\\pages\\appointments\\transfer-appointment",
-    "\\src\\app\\pages\\employees",
-    "\\src\\app\\pages\\patients"
+    "\\src\\app\\pages\\facilities",
+    "\\src\\app\\pages\\facilities\\pharmacy",
+    "\\src\\app\\pages\\facilities\\pharmacy\\view-prescription"
   ],
   "SelectedNode": "\\e2e",
   "PreviewInSolutionExplorer": false

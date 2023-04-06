@@ -43,7 +43,7 @@ export class NewEmployeeComponent implements OnInit {
             idNumber: ['', Validators.required],
             gender: ['', Validators.required],
             dateOfBirth: ['', Validators.required],
-            email: ['', Validators.required],
+            email: ['', Validators.required, Validators.email],
             contact: ['', Validators.required],
             address: ['', Validators.required],
             nokName: ['', Validators.required],

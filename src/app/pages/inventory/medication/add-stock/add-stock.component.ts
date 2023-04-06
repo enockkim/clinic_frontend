@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { AddStock, Inventory, InvetoryCategory } from '../../../../models/Pharmacy';
 import { PharmacyService } from '../../../../services/facilities/pharmacy.service';
 
@@ -15,7 +16,8 @@ export class AddStockComponent implements OnInit {
         private fb: FormBuilder,
         public pharmacyService: PharmacyService,
         dialog: MatDialog,
-        public dialogRef: MatDialogRef<AddStockComponent>
+        public dialogRef: MatDialogRef<AddStockComponent>,
+        private _snackBar: MatSnackBar,
     ) { }
 
     form: FormGroup;
@@ -61,10 +63,20 @@ export class AddStockComponent implements OnInit {
                 stock: Number(formData.stock)
             }
             const newStock = await this.pharmacyService.addStock(addStock);
+
             if (newStock) {
+                this._snackBar.open('Stock updated sucessfully.', 'Ok', {
+                    horizontalPosition: 'center',
+                    verticalPosition: 'top',
+                    duration: 5 * 1000,
+                });
                 this.dialogRef.close(newStock);
             } else {
-                //TODO add error log
+                this._snackBar.open('Error updating stock.', 'Ok', {
+                    horizontalPosition: 'center',
+                    verticalPosition: 'top',
+                    duration: 5 * 1000,
+                });
             }
         }
     }

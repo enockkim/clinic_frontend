@@ -24,7 +24,7 @@ const httpOptions = {
 })
 export class OperationService {
 
-  private apiUrl = 'https://localhost:44320/Operation';
+  private apiUrl = 'https://www.prema.lol/Operation';
 
   constructor(private http: HttpClient) { }
 

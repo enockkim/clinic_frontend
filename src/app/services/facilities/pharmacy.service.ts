@@ -24,7 +24,7 @@ const httpOptions = {
 })
 export class PharmacyService {
 
-  private apiUrl = 'https://localhost:44320/Pharmacy';
+  private apiUrl = 'https://www.prema.lol/Pharmacy';
 
   constructor(private http: HttpClient) { }
 
