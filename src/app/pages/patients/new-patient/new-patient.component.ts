@@ -114,11 +114,11 @@ export class NewPatientComponent implements OnInit {
 
     subcounty(countyId: number) {
         console.log(countyId);
-        this.subcountiesFiltered = this.subcounties.filter(s => s.countyId == countyId)
+        this.subcountiesFiltered = this.subcounties.filter(s => s.fk_county_id == countyId)
     }
     ward(subcountyId: number) {
         console.log(subcountyId);
-        this.wardsFiltered = this.wards.filter(s => s.subcountyId == subcountyId)
+        this.wardsFiltered = this.wards.filter(s => s.fk_subcounty_id == subcountyId)
     }
 
   async onSubmit() {

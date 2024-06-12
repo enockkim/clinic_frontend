@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Bill, BillDetail, CashType, PaymentDetails, AccountsReceivable, BillData } from '../models/Finance';
+import { environment } from './../../environments/environment';
 
 
 const httpOptions1 = {
@@ -23,7 +24,7 @@ const httpOptions = {
 
 export class FinanceService {
 
-    private apiUrl = 'https://www.prema.lol/Finance';
+    private apiUrl = environment.baseUrl + 'Finance';
 
   constructor(private http: HttpClient) { }
 

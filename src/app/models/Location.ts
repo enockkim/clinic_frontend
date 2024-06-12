@@ -1,16 +1,16 @@
 export interface County {
   id: number,
-  county_name: string,
+  name: string,
 }
 
 export interface Subcounty {
-    subcountyId: number,
-    countyId: number,
-    subcountyName: number,
+    id: number,
+    fk_county_id: number,
+    name: number,
 }
 
 export interface Wards {
     id: number,
-    subcountyId: number,
-    ward: string
+    fk_subcounty_id: number,
+    name: string
 }

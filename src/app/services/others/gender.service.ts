@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Gender } from '../../models/Gender';
+import { environment } from './../../../environments/environment';
 
 const httpOptions1 = {
   headers: new HttpHeaders({
@@ -12,9 +13,7 @@ const httpOptions1 = {
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS'
+    'Accept': 'application/json'
     // 'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
   })
 }
@@ -24,12 +23,12 @@ const httpOptions = {
 })
 export class GenderService {
 
-  private apiUrl = 'https://www.prema.lol/Gender';
+  private apiUrl = environment.baseUrl + 'Gender';
 
   constructor(private http: HttpClient) { }
 
   async getGenders(): Promise<Gender[]>{
-    const url = `${this.apiUrl}/GetGenders`;
+    const url = `${this.apiUrl}`;
     return await this.http.get<Gender[]>(url).toPromise();
   }
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Desigation, Employee, EmployeeData, EmploymentType } from '../models/Employee';
+import { environment } from './../../environments/environment';
 
 const httpOptions1 = {
   headers: new HttpHeaders({
@@ -26,7 +27,7 @@ const httpOptions = {
 
 export class EmployeeService {
 
-  private apiUrl = 'https://www.prema.lol/Employee';
+  private apiUrl = environment.baseUrl + 'Employee';
 
   constructor(private http: HttpClient) { }
 

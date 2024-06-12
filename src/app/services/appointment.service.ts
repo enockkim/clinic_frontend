@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Appointment, AppointmentData, AppointmentTypes } from '../models/Appointment';
+import { environment } from './../../environments/environment';
 
 const httpOptions1 = {
   headers: new HttpHeaders({
@@ -24,7 +25,7 @@ const httpOptions = {
 })
 export class AppointmentService {
 
-  private apiUrl = 'https://www.prema.lol/Appointment'; //private apiUrl = 'https://www.prema.lol/Appointment';
+  private apiUrl = environment.baseUrl + 'Appointment'; //private apiUrl = 'https://www.prema.lol/Appointment';
 
   constructor(private http: HttpClient) { }
 

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { DiagnosticImagingRequest, ImagingType, DiagnositcImagingSubtype, DiagnositcImagingType } from '../../models/DiagnosticImaging';
+import { environment } from './../../../environments/environment';
 
 const httpOptions1 = {
   headers: new HttpHeaders({
@@ -24,7 +25,7 @@ const httpOptions = {
 })
 export class DiagnositcImagingService {
 
-  private apiUrl = 'https://www.prema.lol/DiagnosticImaging';
+  private apiUrl = environment.baseUrl + 'DiagnosticImaging';
 
   constructor(private http: HttpClient) { }
 

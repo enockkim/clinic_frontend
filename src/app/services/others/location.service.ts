@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { County, Subcounty, Wards } from '../../models/Location';
+import { environment } from './../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LocationService {
 
-    private apiUrl = 'https://www.prema.lol/Location';
+    private apiUrl = environment.baseUrl + 'Location';
 
     constructor(private http: HttpClient) { }
 

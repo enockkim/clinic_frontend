@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { PaymentMethod } from '../models/PaymentMethod';
+import { environment } from './../../environments/environment';
 
 const httpOptions1 = {
   headers: new HttpHeaders({
@@ -12,9 +13,7 @@ const httpOptions1 = {
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS'
+    'Accept': 'application/json'
     // 'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
   })
 }
@@ -24,12 +23,12 @@ const httpOptions = {
 })
 export class PaymentMethodService {
 
-  private apiUrl = 'https://www.prema.lol/PaymentMethod';
+  private apiUrl = environment.baseUrl + 'PaymentMethod';
 
   constructor(private http: HttpClient) { }
 
   async getPaymentMethods(): Promise<PaymentMethod[]>{
-    const url = `${this.apiUrl}/GetPaymentMethods`;
+    const url = `${this.apiUrl}`;
     return await this.http.get<PaymentMethod[]>(url).toPromise();
   }
 

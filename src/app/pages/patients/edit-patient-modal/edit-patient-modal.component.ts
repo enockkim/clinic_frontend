@@ -47,10 +47,10 @@ export class EditPatientModalComponent implements OnInit {
     form: FormGroup;
 
     subcounty(countyId: number) {
-        this.subcountiesFiltered = this.subcounties.filter(s => s.countyId == countyId);
+        this.subcountiesFiltered = this.subcounties.filter(s => s.id == countyId);
     }
     ward(subcountyId: number) {
-        this.wardsFiltered = this.wards.filter(s => s.subcountyId == subcountyId);
+        this.wardsFiltered = this.wards.filter(s => s.id == subcountyId);
     }
 
     async ngOnInit() {

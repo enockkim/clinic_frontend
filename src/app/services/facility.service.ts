@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Facility } from '../models/Facility';
+import { environment } from './../../environments/environment';
 
 const httpOptions1 = {
   headers: new HttpHeaders({
@@ -24,7 +25,7 @@ const httpOptions = {
 })
 export class FacilityService {
 
-  private apiUrl = 'https://www.prema.lol/Facility';
+  private apiUrl = environment.baseUrl + 'Facility';
 
   constructor(private http: HttpClient) { }
 

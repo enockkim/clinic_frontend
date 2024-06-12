@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Patient, PatientData } from '../models/Patient';
+import { environment } from './../../environments/environment';
 
 const httpOptions1 = {
   headers: new HttpHeaders({
@@ -12,9 +13,7 @@ const httpOptions1 = {
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Accept': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS'
+    'Accept': 'application/json'
     // 'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
   })
 }
@@ -24,12 +23,12 @@ const httpOptions = {
 export class ProjectsService {
 
   // private apiUrl = 'https://www.prema.lol/Projects';
-  private apiUrl = 'https://www.prema.lol/Patient';
+  private apiUrl = environment.baseUrl + 'Patient';
 
   constructor(private http: HttpClient) { }
 
   async getPatients(): Promise<Patient[]>{
-    const url = `${this.apiUrl}/GetPatients`;
+    const url = `${this.apiUrl}`;
     return await this.http.get<Patient[]>(url).toPromise();
   }
 
@@ -51,6 +50,6 @@ export class ProjectsService {
 
     async updatePatient(Patient: PatientData): Promise<PatientData> {
         const url = `${this.apiUrl}/UpdatePatient`;
-        return await this.http.post<PatientData>(url, Patient, httpOptions).toPromise();
+        return await this.http.put<PatientData>(url, Patient, httpOptions).toPromise();
     }
 }

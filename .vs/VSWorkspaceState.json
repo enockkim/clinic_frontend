@@ -1,13 +1,7 @@
 {
   "ExpandedNodes": [
-    "",
-    "\\src",
-    "\\src\\app",
-    "\\src\\app\\pages",
-    "\\src\\app\\pages\\facilities",
-    "\\src\\app\\pages\\facilities\\pharmacy",
-    "\\src\\app\\pages\\facilities\\pharmacy\\view-prescription"
+    ""
   ],
-  "SelectedNode": "\\e2e",
+  "SelectedNode": "\\_old.zip",
   "PreviewInSolutionExplorer": false
 }

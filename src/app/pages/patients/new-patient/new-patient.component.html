@@ -39,7 +39,7 @@
                                   <mat-form-field appearance="fill"class="example-full-width">
                                       <mat-label>Gender</mat-label>
                                       <mat-select formControlName="gender">
-                                        <mat-option *ngFor="let gender of this.genders" [value]="gender.id">{{gender.genderName}}</mat-option>
+                                        <mat-option *ngFor="let gender of this.genders" [value]="gender.id">{{gender.name}}</mat-option>
                                       </mat-select>
                                     </mat-form-field>
                                 </div>
@@ -77,7 +77,7 @@
                                     <mat-form-field appearance="fill" class="example-full-width">
                                         <mat-label>County</mat-label>
                                         <mat-select formControlName="county" [(ngModel)]="countyIndex" (ngModelChange)="subcounty(countyIndex)">
-                                            <mat-option *ngFor="let county of this.counties" [value]="county.id">{{county.county_name}}</mat-option>
+                                            <mat-option *ngFor="let county of this.counties" [value]="county.id">{{county.name}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div> 
@@ -85,7 +85,7 @@
                                     <mat-form-field appearance="fill" class="example-full-width">
                                         <mat-label>Sub-County</mat-label>
                                         <mat-select formControlName="subcounty" [(ngModel)]="subcountyIndex" (ngModelChange)="ward(subcountyIndex)">
-                                            <mat-option *ngFor="let subcounty of this.subcountiesFiltered" [value]="subcounty.subcountyId">{{subcounty.subcountyName}}</mat-option>
+                                            <mat-option *ngFor="let subcounty of this.subcountiesFiltered" [value]="subcounty.id">{{subcounty.name}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
@@ -93,7 +93,7 @@
                                     <mat-form-field appearance="fill" class="example-full-width">
                                         <mat-label>Constituency</mat-label>
                                         <mat-select formControlName="ward">
-                                            <mat-option *ngFor="let ward of this.wardsFiltered" [value]="ward.id">{{ward.ward}}</mat-option>
+                                            <mat-option *ngFor="let ward of this.wardsFiltered" [value]="ward.id">{{ward.name}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
