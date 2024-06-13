@@ -36,7 +36,7 @@ export class ViewPatientsComponent implements OnInit {
 
     editPatient(enterAnimationDuration: string, exitAnimationDuration: string, patientData: Patient): void {
         console.log(patientData);
-        console.log("view",patientData.patientId);
+        console.log("view",patientData.id);
       this.dialog.open(EditPatientModalComponent, {
           data: { patientData: patientData },
          width: "100%",
@@ -54,7 +54,7 @@ export class ViewPatientsComponent implements OnInit {
 
       const patientResult = await this.ProjectsService.getPatients();
 
-      patientResult.sort((a, b) => (a.patientId > b.patientId ? -1 : 1));
+      patientResult.sort((a, b) => (a.id > b.id ? -1 : 1));
     console.log("patients"+patientResult.length);
     this.dataSource.data = patientResult;
 

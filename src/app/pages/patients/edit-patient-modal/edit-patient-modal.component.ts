@@ -11,6 +11,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { County, Subcounty, Wards } from '../../../models/Location';
 import { LocationService } from '../../../services/others/location.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NextOfKin } from 'app/models/NextOfKin';
 
 @Component({
   selector: 'app-edit-patient-modal',
@@ -56,18 +57,18 @@ export class EditPatientModalComponent implements OnInit {
     async ngOnInit() {
 
         this.form = this.fb.group({
-            patientId: [this.data.patientData.patientId, Validators.required],
-            email: [this.data.patientData.otherName, [Validators.required, Validators.email]],
+            patientId: [this.data.patientData.id, Validators.required],
+            email: [this.data.patientData.email, [Validators.required, Validators.email]],
             surname: [this.data.patientData.surname, Validators.required],
-            otherName: [this.data.patientData.otherName, Validators.required],
-            nationalIdNumber: [this.data.patientData.nationalIdNumber, Validators.required],
+            otherName: [this.data.patientData.other_names, Validators.required],
+            nationalIdNumber: [this.data.patientData.national_id_number, Validators.required],
             contact: [this.data.patientData.contact, Validators.required],
-            gender: [this.data.patientData.gender, Validators.required],
-            dob: [this.data.patientData.dob, Validators.required],
-            nokName: [this.data.patientData.nokName, Validators.required],
-            nokContact: [this.data.patientData.nokContact, Validators.required],
-            nokNationalIdNumber: [this.data.patientData.nokNationalIdNumber, Validators.required],
-            nokRelationship: [this.data.patientData.nokRelationship, Validators.required],
+            gender: [this.data.patientData.fk_gender_id, Validators.required],
+            dob: [this.data.patientData.date_of_birth, Validators.required],
+            nokName: [this.data.patientData.next_of_kin.name, Validators.required],
+            nokContact: [this.data.patientData.next_of_kin.contact, Validators.required],
+            nokNationalIdNumber: [this.data.patientData.next_of_kin.national_id_number, Validators.required],
+            nokRelationship: [this.data.patientData.next_of_kin.fk_relationship_id, Validators.required],
             county: ['', Validators.required],
             subcounty: ['', Validators.required],
             ward: ['', Validators.required]
@@ -93,17 +94,22 @@ export class EditPatientModalComponent implements OnInit {
         console.log(this.form.value);
         if (this.form.valid) {
             const formData = this.form.value;
+            let next_of_kin: NextOfKin = {
+                id: 0,
+                name: formData.nokName,
+                contact: Number(formData.nokContact),
+                national_id_number: formData.nokNationalIdNumber,
+                fk_relationship_id: formData.nokRelationship
+            }
             let patient: Patient = {
-                patientId: Number(formData.patientId),
+                id: Number(formData.patientId),
                 surname: formData.surname,
-                otherName: formData.otherName,
-                gender: formData.gender,
+                other_names: formData.otherName,
+                fk_gender_id: formData.gender,
                 contact: Number(formData.contact),
-                dob: formData.dob,
-                nokName: formData.nokName,
-                nokContact: Number(formData.nokContact),
-                nokRelationship: formData.nokRelationship,
-                nationalIdNumber: formData.nationalIdNumber,
+                date_of_birth: formData.dob,
+                next_of_kin: next_of_kin,
+                national_id_number: formData.nationalIdNumber,
                 county: Number(formData.county),
                 subcounty: Number(formData.subcounty),
                 ward: Number(formData.ward),

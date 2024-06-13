@@ -132,7 +132,7 @@
                                     <mat-form-field appearance="fill" class="example-full-width">
                                         <mat-label>Relationship</mat-label>
                                         <mat-select formControlName="nokRelationship">
-                                            <mat-option *ngFor="let relationship of this.relationships" [value]="relationship.relationshipId">{{relationship.relationshipName}}</mat-option>
+                                            <mat-option *ngFor="let relationship of this.relationships" [value]="relationship.id">{{relationship.name}}</mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>

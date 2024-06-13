@@ -64,8 +64,8 @@ export class NewAppointmentComponent implements OnInit {
                 this.button = "Create";
                 console.log(this.data.patientData);
                 this.form = this.fb.group({
-                    patientId: [this.data.patientData.patientId, Validators.required],
-                    patientName: [this.data.patientData.surname + ', ' + this.data.patientData.otherName, Validators.required],
+                    patientId: [this.data.patientData.id, Validators.required],
+                    patientName: [this.data.patientData.surname + ', ' + this.data.patientData.other_names, Validators.required],
                     appointmentType: ['', Validators.required],
                     dateOfAppointment: ['', Validators.required],
                     //paymentMethod: [this.data.appointmentData.paymentMethod, Validators.required], //TODO add later
@@ -122,7 +122,7 @@ export class NewAppointmentComponent implements OnInit {
                 if (this.form.valid) {
                     const formData = this.form.value;
                     let appointmentData: Appointment = {
-                        patientId: this.data.patientData.patientId,
+                        patientId: this.data.patientData.id,
                         employeeId: 0,
                         dateOfAppointment: formData.dateOfAppointment,
                         remarks: formData.remarks,

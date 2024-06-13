@@ -10,6 +10,7 @@ import { User } from '../../../models/User';
 import { County, Subcounty, Wards } from '../../../models/Location';
 import { LocationService } from '../../../services/others/location.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { NextOfKin } from 'app/models/NextOfKin';
 //import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 //import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 
@@ -124,29 +125,33 @@ export class NewPatientComponent implements OnInit {
   async onSubmit() {
     console.log(this.form.value);
     if (this.form.valid) {
-      const formData = this.form.value;
+      const formData = this.form.value;            
+      let next_of_kin: NextOfKin = {
+        id: 0,
+        name: formData.nokName,
+        contact: Number(formData.nokContact),
+        national_id_number: formData.nokNationalIdNumber,
+        fk_relationship_id: formData.nokRelationship
+    }
       let patient: Patient = {
         surname: formData.surname,
-        otherName: formData.otherName,
-        gender: formData.gender,
+        other_names: formData.otherName,
+        fk_gender_id: formData.gender,
         contact: Number(formData.contact),
-        dob: formData.dob,
-        nokName: formData.nokName,
-        nokContact: Number(formData.nokContact),
-          nokRelationship: formData.nokRelationship,
-          nokNationalIdNumber: formData.nokNationalIdNumber,
-        nationalIdNumber: formData.nationalIdNumber,
+        date_of_birth: formData.dob,
+        next_of_kin: next_of_kin,
+        national_id_number: formData.nationalIdNumber,
         county: Number(formData.county),
         subcounty: Number(formData.subcounty),
         ward: Number(formData.ward),
-          status: 1,
-          email: formData.email
+        status: 1,
+        email: formData.email
       }
       this.userData.Id = "3342-2342-324";
       this.userData.UserName = "username";
       this.patientData.patientData = patient;
-        this.patientData.userData = this.userData;
-        const res = await this.ProjectsService.addPatient(this.patientData);
+      this.patientData.userData = this.userData;
+      const res = await this.ProjectsService.addPatient(this.patientData);
 
         if (res != null) {
             this._snackBar.open('Patient added sucessfully.', 'Ok', {
